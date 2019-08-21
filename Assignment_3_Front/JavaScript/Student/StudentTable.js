@@ -1,7 +1,4 @@
-﻿
-
-
-function StudentTable(StudentArray) {
+﻿function StudentTable(StudentArray) {
     //Table Header Students
     var trow = $.parseHTML("<tr></tr>");
     $("#student_thead").append(trow);

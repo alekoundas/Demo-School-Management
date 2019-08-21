@@ -1,14 +1,16 @@
-﻿//$(document).ready(function () {
-//    var StudentsArray = [];
-//    DummyStudents(StudentsArray);
+﻿$(document).ready(function () {
+    var StudentsArray = [];
+    DummyStudents(StudentsArray);
+    //for (var i in StudentsArray) {
+    //    console.log(i);
+    //}
 
 
 
 
 
 
-
-//});
+});
 
 
 
@@ -35,50 +37,55 @@ function SubmitBtClick(ButtonObj) {
     (ResultTuition) ? $('#ModalBodyInputTuition').removeClass("is-invalid") : $('#ModalBodyInputTuition').addClass("is-invalid");
     (ResultBirth) ? $('#ModalBodyInputBirth').removeClass("is-invalid") : $('#ModalBodyInputBirth').addClass("is-invalid");
 
-    console.log(ResultFname);
-    console.log(ResultLname);
-    console.log(ResultTuition);
-    console.log(ResultBirth);
 
-    var ModalBodyCellArray = $(ButtonObj).parent().parent().children(".modal-body").children(".row").children(".col-3").children("p");
+    var ModalBodyCellArray = $(ButtonObj).parent().parent().children(".modal-body").children(".row").children(".col-3").children("input");
     var UserInputTest = true;
+    var EditedInputsOnly = [];
     for (var i = 0; i < ModalBodyCellArray.length; i++) {
         //Compare The input By name 
-        
-        if (!$(ModalBodyCellArray[i]).is(':visible')) {
+
+        if ($(ModalBodyCellArray[i]).is(':visible')) {
             switch ($(ModalBodyCellArray[i]).siblings('input').attr('name')) {
                 case 'Fname':
-                    if (ResultLname)
+                    if (ResultFname) {
+                        EditedInputsOnly.add(ModalBodyCellArray[i])
                         break;
+                    }
+                        
                     UserInputTest = false;
-                    break;                                      
+                    break;
                 case 'Lname':
-                    if (ResultFname) 
-                        break;                                     
+                    if (ResultLname) {
+                        EditedInputsOnly.add(ModalBodyCellArray[i])
+                        break;
+                    }
                     UserInputTest = false;
                     break;
                 case 'Tuition':
-                    if (ResultTuition) 
+                    if (ResultTuition) {
+                        EditedInputsOnly.add(ModalBodyCellArray[i])
                         break;
+                    }
                     UserInputTest = false;
                     break;
                 case 'Birth':
-                    if (ResultBirth) 
-                       break;
+                    if (ResultBirth) {
+                        EditedInputsOnly.add(ModalBodyCellArray[i])
+                        break;
+                    }
                     UserInputTest = false;
                     break;
                 default:
-            }                     
+            }
         }
+        for (var i = 0; i < EditedInputsOnly.length; i++) {
+            (UserInputTest) ? ToggleModalBodyCell(EditedInputsOnly[i]) : alert("Please Use Correct Input");
+        }
+
+        
     }
-    (UserInputTest) ? ToggleModalBodyCell(ModalBodyCellArray[i]) : alert("Malakaaaaa");
 
-
-
-    //console.log(Firstname);
-    //console.log(Lastname);
-    //console.log(Tuition);
-    //console.log(Birth);
+  
 }
 
 
@@ -87,6 +94,14 @@ function SubmitBtClick(ButtonObj) {
 
 
 
-//function DummyStudents(StudentsArray) {
-//    $(StudentsArray).add()
-//}
+function DummyStudents(StudentsArray) {
+    var Student = {
+        Fname: "Alex",
+        Lname: "Psychoson",
+        Tuition: 1500,
+        DateOfBirth: new Date(1995, 1, 1)
+    };
+    $(StudentsArray).add(Student);
+    $(StudentsArray).add(Student);
+    $(StudentsArray).add(Student);
+}

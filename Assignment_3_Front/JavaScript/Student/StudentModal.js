@@ -12,12 +12,12 @@ var ModalHeaderButton = $.parseHTML("<button type ='button' class='close' data-d
 var ModalBody = $.parseHTML("<div class='modal-body'></div>");
 var ModalBodyRowGrid = $.parseHTML("<div class='row'></div>");
 var ModalBodyColGrid = $.parseHTML("<div class='col-3'></div>");
-var ModalBodyFname = $.parseHTML("  <p onclick='ToggleModalBodyCell(this);' id='ModalBodyFname'>  </p>");
-var ModalBodyLname = $.parseHTML("  <p onclick='ToggleModalBodyCell(this);' id='ModalBodyLname'>  </p>");
-var ModalBodyTuition = $.parseHTML("<p onclick='ToggleModalBodyCell(this);' id='ModalBodyTuition'></p>");
-var ModalBodyBirth = $.parseHTML("  <p onclick='ToggleModalBodyCell(this);' id='ModalBodyBirth'>  </p>");
-var ModalBodyInputFname = $.parseHTML("  <input type='text' name='Fname'   style = 'display:none;' class='form-control' id='ModalBodyInputLname'   >");
-var ModalBodyInputLname = $.parseHTML("  <input type='text' name='Lname'   style = 'display:none;' class='form-control' id='ModalBodyInputFname'   >");
+var ModalBodyFname = $.parseHTML("  <p onclick='ToggleModalBodyCell(this);'  id='ModalBodyFname'>  </p>");
+var ModalBodyLname = $.parseHTML("  <p onclick='ToggleModalBodyCell(this);'  id='ModalBodyLname'>  </p>");
+var ModalBodyTuition = $.parseHTML("<p onclick='ToggleModalBodyCell(this);'  id='ModalBodyTuition'></p>");
+var ModalBodyBirth = $.parseHTML("  <p onclick='ToggleModalBodyCell(this);'  id='ModalBodyBirth'>  </p>");
+var ModalBodyInputFname = $.parseHTML("  <input type='text' name='Fname'   style = 'display:none;' class='form-control' id='ModalBodyInputFname'   >");
+var ModalBodyInputLname = $.parseHTML("  <input type='text' name='Lname'   style = 'display:none;' class='form-control' id='ModalBodyInputLname'   >");
 var ModalBodyInputTuition = $.parseHTML("<input type='text' name='Tuition' style = 'display:none;' class='form-control' id='ModalBodyInputTuition' >");
 var ModalBodyInputBirth = $.parseHTML("  <input type='text' name='Birth'   style = 'display:none;' class='form-control' id='ModalBodyInputBirth'   >");
 
@@ -71,11 +71,10 @@ $(ModalFooter).append(ModalFooterCancelbt);
 $(ModalFooter).append(ModalFooterUpdatebt);
 
 
-function ToggleModalBodyCell(ElementP) {
+function ToggleModalBodyCell(Element) {
     //Hides <p> and shows <input> And Reverse
-
-    $(ElementP).toggle();
-    $($(ElementP).siblings()).toggle();
+    $(Element).css('display', 'none');
+    $($(Element).siblings()).css('display', 'block');
 
     //toggle() Or .show-hide() Removes The in-line css display from element
     //So i Cant Check The Value Of display
@@ -83,32 +82,17 @@ function ToggleModalBodyCell(ElementP) {
 
 
 function EditRow(row) {
-    //var Column_Num = parseInt($(row).parent().parent().index());   
-    //ModalBuild($('tbody').children("tr:eq( " + Column_Num + " )").children("td:eq( 1 )").text(), $('tbody').children("tr:eq( " + Column_Num + " )").children("td:eq( 2 )").text());
-
-
-
-
     $($(row).attr("data-target")).modal("show");//show modal 
-
 
     var fname = $(row).parent().siblings("td:eq( 1 )").text();
     var lname = $(row).parent().siblings("td:eq( 2 )").text();
     var tuition = $(row).parent().siblings("td:eq( 3 )").text()
     var Birth = $(row).parent().siblings("td:eq( 4 )").text()
 
-
     $('#ModalTitle').text(fname + "  " + lname);
     $('#ModalBodyFname').text(fname);
     $('#ModalBodyLname').text(lname);
     $('#ModalBodyTuition').text(tuition);
     $('#ModalBodyBirth').text(Birth);
-
-
-
-
-    console.log($(row).parent().siblings("td:eq( 1 )").text());
-    console.log();
-
 }
 

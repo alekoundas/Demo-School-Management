@@ -78,7 +78,6 @@
     <Content Include="CSS\ResetCss.css" />
     <Content Include="CSS\StyleSheet.css" />
     <Content Include="index.html" />
-    <Content Include="JavaScript\DataBase\DataBase.js" />
     <Content Include="JavaScript\Student\StudentModal.js" />
     <Content Include="JavaScript\CommonTools.js" />
     <Content Include="JavaScript\main.js" />
