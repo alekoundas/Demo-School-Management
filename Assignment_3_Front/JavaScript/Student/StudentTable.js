@@ -1,15 +1,7 @@
-﻿$(document).ready(function () {
-
-     $("#modal").append(BaseModal); //Append Completed modal to empty div
-
-    var Student = {
-        Fname: "Alex",
-        Lname: "Psychoson",
-        Tuition: 1500,
-        DateOfBirth: new Date(1995, 1, 1)
-    };
+﻿
 
 
+function StudentTable(StudentArray) {
     //Table Header Students
     var trow = $.parseHTML("<tr></tr>");
     $("#student_thead").append(trow);
@@ -20,6 +12,9 @@
     $(trow).append($.parseHTML("<th> Date Of Birth </th>"));
     $(trow).append($.parseHTML("<th> Action </th>"));
 
+    //for (var i = 0; i < StudentArray.length(); i++) {
+
+    //}
     //Table Body Students
     var trow = $.parseHTML("<tr></tr>");
     $("#student_tbody").append(trow);
@@ -39,15 +34,4 @@
     $(trow).append($.parseHTML("<td>" + Student.DateOfBirth.getFullYear() + "</td>"));
     $(trow).append($.parseHTML("<td> <button onclick='EditRow(this);'data-toggle='modal' data-target='#exampleModalCenter' class='btn btn-primary'>Edit</button><button class='btn btn-danger'>Delete</button> </td>"));
 
-
-
-
-
-});
-
-
-
-
-
-
-
+}

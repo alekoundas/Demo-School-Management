@@ -78,8 +78,12 @@
     <Content Include="CSS\ResetCss.css" />
     <Content Include="CSS\StyleSheet.css" />
     <Content Include="index.html" />
+    <Content Include="JavaScript\DataBase\DataBase.js" />
+    <Content Include="JavaScript\Student\StudentModal.js" />
     <Content Include="JavaScript\CommonTools.js" />
     <Content Include="JavaScript\main.js" />
+    <Content Include="JavaScript\Student\Student.js" />
+    <Content Include="JavaScript\Student\StudentTable.js" />
     <Content Include="PeopleCert Logo.png" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
@@ -161,9 +165,7 @@
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="JavaScript\AJAX\" />
-  </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

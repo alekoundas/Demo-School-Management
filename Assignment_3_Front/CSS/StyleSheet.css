@@ -1,8 +1,12 @@
 ﻿
 .body_class {
     background-color: rgba(76, 73, 73, 0.75);
+    height:9999px;
 }
 
+.container {
+    background-color: rgba(228, 233, 255, 0.73);
+}
 
 
 img {
