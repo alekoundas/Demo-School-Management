@@ -5,11 +5,12 @@
     <meta name="viewport" content="width=device-width" />
     <title>Private School</title>
     <script src="Scripts/jquery-3.4.1.js"></script>
-    <script src="JavaScript/CommonTools.js"></script>
     <script src="JavaScript/main.js"></script>
     <script src="JavaScript/Student/Student.js"></script>
     <script src="JavaScript/Student/StudentTable.js"></script>
-    <script src="JavaScript/Student/StudentModal.js"></script>
+    <script src="JavaScript/Student/EditStudentModal.js"></script>
+    <script src="JavaScript/Student/AddStudentModal.js"></script>
+
     <link href="CSS/ResetCss.css" rel="stylesheet" />
     <link href="CSS/StyleSheet.css" rel="stylesheet" />
 
@@ -23,8 +24,6 @@
 </head>
 <body>
     <div class="body_class">
-
-
         <div class="MainNav">
             <nav class="navbar sticky-top navbar-dark bg-dark">
                 <a class="navbar-brand" href="#">
@@ -36,23 +35,12 @@
                 <a class="navbar-brand" href="#">Assignments</a>
             </nav>
         </div>
-        <div class="container">
-            <table class="table">
-                <thead class="thead-dark" id="student_thead">
-                </thead>
-                <tbody id="student_tbody">
-                </tbody>
-
-            </table>
-
-        </div>
+        <div id="StudentTable" class="container"></div>
     </div>
 
 
 
 
-
-    <div id="modal"></div>
 
 
 

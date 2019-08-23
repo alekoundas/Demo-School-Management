@@ -78,10 +78,11 @@
     <Content Include="CSS\ResetCss.css" />
     <Content Include="CSS\StyleSheet.css" />
     <Content Include="index.html" />
-    <Content Include="JavaScript\Student\StudentModal.js" />
-    <Content Include="JavaScript\CommonTools.js" />
+    <Content Include="JavaScript\Student\AddStudentModal.js" />
+    <Content Include="JavaScript\Student\EditStudentModal.js" />
     <Content Include="JavaScript\main.js" />
     <Content Include="JavaScript\Student\Student.js" />
+    <Content Include="JavaScript\Student\StudentTable.html" />
     <Content Include="JavaScript\Student\StudentTable.js" />
     <Content Include="PeopleCert Logo.png" />
     <Content Include="Scripts\bootstrap.bundle.js" />

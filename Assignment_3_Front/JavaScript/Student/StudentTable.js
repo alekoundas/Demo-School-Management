@@ -1,4 +1,5 @@
 ﻿function StudentTable(StudentArray) {
+
     //Table Header Students
     var trow = $.parseHTML("<tr></tr>");
     $("#student_thead").append(trow);
@@ -8,27 +9,21 @@
     $(trow).append($.parseHTML("<th> Tuition </th>"));
     $(trow).append($.parseHTML("<th> Date Of Birth </th>"));
     $(trow).append($.parseHTML("<th> Action </th>"));
+    $(trow).append($.parseHTML("<th><button onclick='AddStudent();' class=' btn btn-sm btn-success'>+</button> </td>"));
+    $(trow).append($.parseHTML("<th><button onclick='RefreshStudentHtml();' class=' btn btn-sm btn-success'>+</button> </td>"));
 
-    //for (var i = 0; i < StudentArray.length(); i++) {
 
-    //}
     //Table Body Students
-    var trow = $.parseHTML("<tr></tr>");
-    $("#student_tbody").append(trow);
-    $(trow).append($.parseHTML("<td>" + 1 + "</td>"));
-    $(trow).append($.parseHTML("<td>Nikos</td>"));
-    $(trow).append($.parseHTML("<td>" + Student.Lname + "</td>"));
-    $(trow).append($.parseHTML("<td>" + Student.Tuition + "</td>"));
-    $(trow).append($.parseHTML("<td>" + Student.DateOfBirth.getFullYear() + "</td>"));
-    $(trow).append($.parseHTML("<td> <button onclick='EditRow(this);'data-toggle='modal' data-target='#exampleModalCenter' class='btn btn-primary'>Edit</button><button class='btn btn-danger'>Delete</button> </td>"));
+    for (var i = 0; i < StudentArray.length; i++) {
 
-    var trow = $.parseHTML("<tr></tr>");
-    $("#student_tbody").append(trow);
-    $(trow).append($.parseHTML("<td>" + 2 + "</td>"));
-    $(trow).append($.parseHTML("<td>" + Student.Fname + "</td>"));
-    $(trow).append($.parseHTML("<td>" + Student.Lname + "</td>"));
-    $(trow).append($.parseHTML("<td>" + Student.Tuition + "</td>"));
-    $(trow).append($.parseHTML("<td>" + Student.DateOfBirth.getFullYear() + "</td>"));
-    $(trow).append($.parseHTML("<td> <button onclick='EditRow(this);'data-toggle='modal' data-target='#exampleModalCenter' class='btn btn-primary'>Edit</button><button class='btn btn-danger'>Delete</button> </td>"));
+        trow = $.parseHTML("<tr></tr>");
+        $("#student_tbody").append(trow);
+        $(trow).append($.parseHTML("<td>" + i + "</td>"));
+        $(trow).append($.parseHTML("<td>" + StudentArray[i].Fname + "</td>"));
+        $(trow).append($.parseHTML("<td>" + StudentArray[i].Lname + "</td>"));
+        $(trow).append($.parseHTML("<td>" + StudentArray[i].Tuition + "</td>"));
+        $(trow).append($.parseHTML("<td>" + StudentArray[i].DateOfBirth.getFullYear() + "</td>"));
+        $(trow).append($.parseHTML("<td> <button onclick='EditRow(this,"+StudentArray[i].id+");'data-toggle='modal' data-target='#exampleModalCenter' class='btn btn-primary'>Edit</button><button class='btn btn-danger'>Delete</button> </td>"));
 
+    }
 }

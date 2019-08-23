@@ -1,53 +1,30 @@
 ﻿$(document).ready(function () {
 
-     $("#modal").append(BaseModal); //Append Completed modal to empty div
-
-    var Student = {
-        Fname: "Alex",
-        Lname: "Psychoson",
-        Tuition: 1500,
-        DateOfBirth: new Date(1995, 1, 1)
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+            console.log(xhttp.responseText);
+            document.getElementById("StudentTable").innerHTML = xhttp.responseText;
+            GetStudentTable();
+        }
     };
-
-
-    //Table Header Students
-    var trow = $.parseHTML("<tr></tr>");
-    $("#student_thead").append(trow);
-    $(trow).append($.parseHTML("<th> No. </th>"));
-    $(trow).append($.parseHTML("<th> First Name </th>"));
-    $(trow).append($.parseHTML("<th> Last Name </th>"));
-    $(trow).append($.parseHTML("<th> Tuition </th>"));
-    $(trow).append($.parseHTML("<th> Date Of Birth </th>"));
-    $(trow).append($.parseHTML("<th> Action </th>"));
-
-    //Table Body Students
-    var trow = $.parseHTML("<tr></tr>");
-    $("#student_tbody").append(trow);
-    $(trow).append($.parseHTML("<td>" + 1 + "</td>"));
-    $(trow).append($.parseHTML("<td>Nikos</td>"));
-    $(trow).append($.parseHTML("<td>" + Student.Lname + "</td>"));
-    $(trow).append($.parseHTML("<td>" + Student.Tuition + "</td>"));
-    $(trow).append($.parseHTML("<td>" + Student.DateOfBirth.getFullYear() + "</td>"));
-    $(trow).append($.parseHTML("<td> <button onclick='EditRow(this);'data-toggle='modal' data-target='#exampleModalCenter' class='btn btn-primary'>Edit</button><button class='btn btn-danger'>Delete</button> </td>"));
-
-    var trow = $.parseHTML("<tr></tr>");
-    $("#student_tbody").append(trow);
-    $(trow).append($.parseHTML("<td>" + 2 + "</td>"));
-    $(trow).append($.parseHTML("<td>" + Student.Fname + "</td>"));
-    $(trow).append($.parseHTML("<td>" + Student.Lname + "</td>"));
-    $(trow).append($.parseHTML("<td>" + Student.Tuition + "</td>"));
-    $(trow).append($.parseHTML("<td>" + Student.DateOfBirth.getFullYear() + "</td>"));
-    $(trow).append($.parseHTML("<td> <button onclick='EditRow(this);'data-toggle='modal' data-target='#exampleModalCenter' class='btn btn-primary'>Edit</button><button class='btn btn-danger'>Delete</button> </td>"));
-
-
+    xhttp.open("GET", "/JavaScript/Student/StudentTable.html", true);
+    xhttp.send();
 
 
 
 });
 
+function RefreshStudentHtml() {
 
-
-
-
-
-
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+            console.log(xhttp.responseText);
+            document.getElementById("StudentTable").innerHTML = xhttp.responseText;
+            GetStudentTable();
+        }
+    };
+    xhttp.open("GET", "/JavaScript/Student/StudentTable.html", true);
+    xhttp.send();
+}
