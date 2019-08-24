@@ -2,8 +2,7 @@
 
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function () {
-        if (this.readyState == 4 && this.status == 200) {
-            console.log(xhttp.responseText);
+        if (this.readyState == 4 && this.status == 200) {            
             document.getElementById("StudentTable").innerHTML = xhttp.responseText;
             GetStudentTable();
         }
@@ -20,7 +19,6 @@ function RefreshStudentHtml() {
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
-            console.log(xhttp.responseText);
             document.getElementById("StudentTable").innerHTML = xhttp.responseText;
             GetStudentTable();
         }

@@ -9,8 +9,8 @@
     $(trow).append($.parseHTML("<th> Tuition </th>"));
     $(trow).append($.parseHTML("<th> Date Of Birth </th>"));
     $(trow).append($.parseHTML("<th> Action </th>"));
-    $(trow).append($.parseHTML("<th><button onclick='AddStudent();' class=' btn btn-sm btn-success'>+</button> </td>"));
-    $(trow).append($.parseHTML("<th><button onclick='RefreshStudentHtml();' class=' btn btn-sm btn-success'>+</button> </td>"));
+    $(trow).append($.parseHTML("<th><button onclick='AddStudent();' data-toggle='modal' data-target='#addElementModal' class=' btn btn-sm btn-success'>+</button> </td>"));
+    $(trow).append($.parseHTML("<th><button onclick='RefreshStudentHtml();' class=' btn btn-sm btn-success'>0</button> </td>"));
 
 
     //Table Body Students
@@ -22,8 +22,8 @@
         $(trow).append($.parseHTML("<td>" + StudentArray[i].Fname + "</td>"));
         $(trow).append($.parseHTML("<td>" + StudentArray[i].Lname + "</td>"));
         $(trow).append($.parseHTML("<td>" + StudentArray[i].Tuition + "</td>"));
-        $(trow).append($.parseHTML("<td>" + StudentArray[i].DateOfBirth.getFullYear() + "</td>"));
-        $(trow).append($.parseHTML("<td> <button onclick='EditRow(this,"+StudentArray[i].id+");'data-toggle='modal' data-target='#exampleModalCenter' class='btn btn-primary'>Edit</button><button class='btn btn-danger'>Delete</button> </td>"));
+        $(trow).append($.parseHTML("<td>" + StudentArray[i].Birth.getFullYear() + "</td>"));
+        $(trow).append($.parseHTML("<td> <button onclick='EditRow(this,"+StudentArray[i].id+");'data-toggle='modal' data-target='#editElementModal' class='btn btn-primary'>Edit</button><button class='btn btn-danger'>Delete</button> </td>"));
 
     }
 }
