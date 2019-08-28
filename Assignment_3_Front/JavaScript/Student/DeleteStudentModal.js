@@ -47,8 +47,7 @@ function DeleteRowStudent(StudentId) {
     $("#DeleteStudentModal").modal("show");//show modal 
     $('#DeleteStudentModalButton').click(function (e) {
         DeleteStudentFromDataBase(StudentId);
-    });
-    
+    });  
 }
 
 

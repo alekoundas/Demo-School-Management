@@ -1,4 +1,4 @@
-﻿function GetDeleteModalTrainer() {
+﻿function GetDeleteModalCourse() {
 
     var BaseModal = $.parseHTML("<div class='modal fade' id='deleteElementModal' tabindex='-1' role='dialog' aria-labelledby='exampleModalCenterTitle' aria-hidden='false'></div>");
     var ModalDialog = $.parseHTML("<div class='modal-dialog modal-dialog-centered modal-lg' role='document'></div>");
@@ -15,7 +15,7 @@
     //Modal Footer Build Here
     var ModalFooter = $.parseHTML("<div class='modal-footer'></div>");
     var ModalFooterCancelbt = $.parseHTML("<button type='button' class='btn btn-success mr-auto' data-dismiss='modal'>Cancel</button>");
-    var ModalFooterUpdatebt = $.parseHTML("<button type='button' class='btn btn-danger ' id = 'DeleteTrainerModalButton' onclick='RefreshTrainerHtml();'>I Understand</button>");
+    var ModalFooterUpdatebt = $.parseHTML("<button type='button' class='btn btn-danger ' id = 'DeleteCourseModalButton' onclick='RefreshCourseHtml();'>I Understand</button>");
 
 
 
@@ -43,10 +43,10 @@
 
 
 
-function DeleteRowTrainer(TrainerId) {
-    $("#DeleteTrainerModal").modal("show");//show modal 
-    $('#DeleteTrainerModalButton').click(function (e) {
-        DeleteTrainerFromDataBase(TrainerId);
+function DeleteRowCourse(CourseId) {
+    $("#DeleteCourseModal").modal("show");//show modal 
+    $('#DeleteCourseModalButton').click(function (e) {
+        DeleteCourseFromDataBase(CourseId);
         ResetModals();
     });  
 }
@@ -54,11 +54,11 @@ function DeleteRowTrainer(TrainerId) {
 
 
 
-function DeleteTrainerFromDataBase(TrainerId) {
+function DeleteCourseFromDataBase(CourseId) {
 
-    for (var i = 0; i < TrainersArray.length; i++) {
-        if (TrainersArray[i].id == TrainerId) {
-            TrainersArray.splice(i, 1);
+    for (var i = 0; i < CoursesArray.length; i++) {
+        if (CoursesArray[i].id == CourseId) {
+            CoursesArray.splice(i, 1);
         }
     }
 }

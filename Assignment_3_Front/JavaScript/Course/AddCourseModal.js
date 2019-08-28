@@ -1,4 +1,4 @@
-﻿function GetAddModalTrainer() {
+﻿function GetAddModalCourse() {
 
     var BaseModal = $.parseHTML("<div class='modal fade' id='addElementModal' tabindex='-1' role='dialog' aria-labelledby='exampleModalCenterTitle' aria-hidden='false'></div>");
     var ModalDialog = $.parseHTML("<div class='modal-dialog modal-dialog-centered modal-lg' role='document'></div>");
@@ -6,13 +6,13 @@
 
     //Modal Header Build Here
     var ModalHeader = $.parseHTML("<div class='modal-header'></div>");
-    var ModalHeaderTitle = $.parseHTML("<h5 class='modal-title' >Add New Trainer</h5>");
+    var ModalHeaderTitle = $.parseHTML("<h5 class='modal-title' >Add New Course</h5>");
     var ModalHeaderButton = $.parseHTML("<button type ='button' class='close' data-dismiss='modal' aria-label='Close'><span aria-hidden='true'>&times;</span></button >");
 
 
     //Modal Body Build Here
     var ModalBody = $.parseHTML("<div class='modal-body'></div>");
-    var ModalBodyRowGrid = $.parseHTML("<div class='row'></div>");//Add data-trainerid From EditRow()
+    var ModalBodyRowGrid = $.parseHTML("<div class='row'></div>");//Add data-Courseid From EditRow()
     var ModalBodyColGrid = $.parseHTML("<div class='col-3'></div>");
     var ModalBodyInputFname = $.parseHTML("  <input type='text' name='Fname'   class='form-control'  id='AddModalBodyInputFname'     >");
     var ModalBodyInputLname = $.parseHTML("  <input type='text' name='Lname'   class='form-control'  id='AddModalBodyInputLname'     >");
@@ -22,7 +22,7 @@
     //Modal Footer Build Here
     var ModalFooter = $.parseHTML("<div class='modal-footer'></div>");
     var ModalFooterCancelbt = $.parseHTML("<button type='button' class='btn btn-danger  mr-auto' data-dismiss='modal'>Cancel</button>");
-    var ModalFooterUpdatebt = $.parseHTML("<button type='button' class='btn btn-success' onclick='SubmitAddTrainer(this);RefreshTrainerHtml();'>Add</button>");
+    var ModalFooterUpdatebt = $.parseHTML("<button type='button' class='btn btn-success' onclick='SubmitAddCourse(this);RefreshCourseHtml();'>Add</button>");
 
 
 
@@ -77,12 +77,12 @@
 
 
 
-function AddTrainer() {
-    $("#AddTrainerModal").modal("show");//show modal 
+function AddCourse() {
+    $("#AddCourseModal").modal("show");//show modal 
 }
 
 
-function SubmitAddTrainer(ButtonObj) {
+function SubmitAddCourse(ButtonObj) {
 
     //Get Values From Inputs
     var Firstname = $('#AddModalBodyInputFname').val();
@@ -134,34 +134,34 @@ function SubmitAddTrainer(ButtonObj) {
     }
     //Check If Every Input Has Correct Val In It
     if (InputAreasComplete) {
-        AddTrainerToDataBase(ModalBodyCellArray);//Edit Trainer Attributes       
-        RefreshTrainerHtml();//Refresh Trainer Table With The New Data
+        AddCourseToDataBase(ModalBodyCellArray);//Edit Course Attributes       
+        RefreshCourseHtml();//Refresh Course Table With The New Data
         ResetModals();
     }
 }
 
 
 
-function AddTrainerToDataBase(NewTrainerData) {
+function AddCourseToDataBase(NewCourseData) {
     //Find The Max Id +1 For The Next Insert To Database
     var Max_Id = -1;
-    for (var i = 0; i < TrainersArray.length; i++) {
-        if (TrainersArray[i].id > Max_Id) {
-            Max_Id = TrainersArray[i].id;
+    for (var i = 0; i < CoursesArray.length; i++) {
+        if (CoursesArray[i].id > Max_Id) {
+            Max_Id = CoursesArray[i].id;
         }
     }
-    var NewTrainer = { id: Max_Id + 1 };
-    for (var i = 0; i < NewTrainerData.length; i++) {
+    var NewCourse = { id: Max_Id + 1 };
+    for (var i = 0; i < NewCourseData.length; i++) {
         //Compare The input By name 
-        switch ($(NewTrainerData[i]).attr('name')) {
+        switch ($(NewCourseData[i]).attr('name')) {
             case 'Fname':
-                NewTrainer.Fname = $(NewTrainerData[i]).val();
+                NewCourse.Fname = $(NewCourseData[i]).val();
                 break;
             case 'Lname':
-                NewTrainer.Lname = $(NewTrainerData[i]).val();
+                NewCourse.Lname = $(NewCourseData[i]).val();
                 break;
             case 'Subject':
-                NewTrainer.Subject = $(NewTrainerData[i]).val();
+                NewCourse.Subject = $(NewCourseData[i]).val();
                 break;
             default:
                 { }
@@ -169,5 +169,5 @@ function AddTrainerToDataBase(NewTrainerData) {
     }
 
     //Add To DB
-    TrainersArray.push(NewTrainer);
+    CoursesArray.push(NewCourse);
 }

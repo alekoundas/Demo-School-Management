@@ -8,9 +8,9 @@
     $(trow).append($.parseHTML("<th> Last Name </th>"));
     $(trow).append($.parseHTML("<th> Tuition </th>"));
     $(trow).append($.parseHTML("<th> Date Of Birth </th>"));
-    $(trow).append($.parseHTML("<th> Action </th>"));
-    $(trow).append($.parseHTML("<th><button onclick='AddStudent();' data-toggle='modal' data-target='#addElementModal' class=' btn btn-sm btn-success'>+</button> </td>"));
-    $(trow).append($.parseHTML("<th><button onclick='RefreshStudentHtml();' class=' btn btn-sm btn-success'>0</button> </td>"));
+    $(trow).append($.parseHTML("<th> Action <button onclick='AddStudent();' data-toggle='modal' data-target='#addElementModal' class=' btn btn-sm btn-success'>+</button> <button onclick='RefreshStudentHtml();' class=' btn btn-sm btn-success'>0</button> </th>"));
+    //$(trow).append($.parseHTML("<th> </td>"));
+    //$(trow).append($.parseHTML("<th></td>"));
 
 
     //Table Body Students

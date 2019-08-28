@@ -7,9 +7,9 @@
     $(trow).append($.parseHTML("<th> First Name </th>"));
     $(trow).append($.parseHTML("<th> Last Name </th>"));
     $(trow).append($.parseHTML("<th> Subject </th>"));
-    $(trow).append($.parseHTML("<th> Action </th>"));
-    $(trow).append($.parseHTML("<th><button onclick='AddTrainer();' data-toggle='modal' data-target='#addElementModal' class=' btn btn-sm btn-success'>+</button> </td>"));
-    $(trow).append($.parseHTML("<th><button onclick='RefreshTrainerHtml();' class=' btn btn-sm btn-success'>0</button> </td>"));
+    $(trow).append($.parseHTML("<th> Action <button onclick='AddTrainer();' data-toggle='modal' data-target='#addElementModal' class=' btn btn-sm btn-success'>+</button><button onclick='RefreshTrainerHtml();' class=' btn btn-sm btn-success'>0</button> </th>"));
+    //$(trow).append($.parseHTML("<button onclick='AddTrainer();' data-toggle='modal' data-target='#addElementModal' class=' btn btn-sm btn-success'>+</button> "));
+    //$(trow).append($.parseHTML("<button onclick='RefreshTrainerHtml();' class=' btn btn-sm btn-success'>0</button> </th>"));
 
 
     //Table Body Trainers

@@ -1,4 +1,4 @@
-﻿function GetEditModalTrainer() {
+﻿function GetEditModalCourse() {
 
 
     var BaseModal = $.parseHTML("<div class='modal fade' id='editElementModal' tabindex='-1' role='dialog' ></div>");
@@ -13,11 +13,11 @@
 
     //Modal Body Build Here
     var ModalBody = $.parseHTML("<div class='modal-body'></div>");
-    var ModalBodyRowGrid = $.parseHTML("<div class='row'></div>");//Add data-trainerid From EditRow()
+    var ModalBodyRowGrid = $.parseHTML("<div class='row'></div>");//Add data-cousrid From EditRow()
     var ModalBodyColGrid = $.parseHTML("<div class='col-3'></div>");
-    var ModalBodyFname = $.parseHTML("  <p onclick='ToggleModalBodyCellTrainer(this);' id='ModalBodyFname'>  </p>");
-    var ModalBodyLname = $.parseHTML("  <p onclick='ToggleModalBodyCellTrainer(this);' id='ModalBodyLname'>  </p>");
-    var ModalBodySubject = $.parseHTML("<p onclick='ToggleModalBodyCellTrainer(this);' id='ModalBodySubject'></p>");
+    var ModalBodyFname = $.parseHTML("  <p onclick='ToggleModalBodyCellCourse(this);' id='ModalBodyFname'>  </p>");
+    var ModalBodyLname = $.parseHTML("  <p onclick='ToggleModalBodyCellCourse(this);' id='ModalBodyLname'>  </p>");
+    var ModalBodySubject = $.parseHTML("<p onclick='ToggleModalBodyCellCourse(this);' id='ModalBodySubject'></p>");
     var ModalBodyInputFname = $.parseHTML("  <input type='text' name='Fname'    id='EditModalBodyInputFname'  style = 'display:none;' class='form-control'  >");
     var ModalBodyInputLname = $.parseHTML("  <input type='text' name='Lname'    id='EditModalBodyInputLname'  style = 'display:none;' class='form-control'  >");
     var ModalBodyInputSubject = $.parseHTML("<input type='text' name='Subject'  id='EditModalBodyInputSubject'style = 'display:none;' class='form-control'  >");
@@ -27,7 +27,7 @@
     //Modal Footer Build Here
     var ModalFooter = $.parseHTML("<div class='modal-footer'></div>");
     var ModalFooterCancelbt = $.parseHTML("<button type='button' class='btn btn-danger  mr-auto' data-dismiss='modal'>Cancel</button>");
-    var ModalFooterUpdatebt = $.parseHTML("<button type='button' class='btn btn-success' onclick='SubmitEditButtonTrainer(this);RefreshTrainerHtml();'>Update</button>");
+    var ModalFooterUpdatebt = $.parseHTML("<button type='button' class='btn btn-success' onclick='SubmitEditButtonCourse(this);RefreshCourseHtml();'>Update</button>");
 
 
 
@@ -75,7 +75,7 @@
 
 
 
-function SubmitEditButtonTrainer(ButtonObj) {
+function SubmitEditButtonCourse(ButtonObj) {
 
     //Get Values From Inputs
     var Firstname = $('#EditModalBodyInputFname').val();
@@ -140,33 +140,33 @@ function SubmitEditButtonTrainer(ButtonObj) {
     if (InputAreasComplete) {
         
         for (var i = 0; i < EditedInputsOnly.length; i++)//Hides The Correct input And Show The p
-            ToggleModalBodyCellTrainer(EditedInputsOnly[i]);
+            ToggleModalBodyCellCourse(EditedInputsOnly[i]);
 
-        EditTrainerFromDataBase(EditedInputsOnly); //Edit Trainer Attributes  
+        EditCourseFromDataBase(EditedInputsOnly); //Edit Course Attributes  
         ResetModals();
     }
 }
 
 
 
-function EditTrainerFromDataBase(TrainerEdited) {
-    //Get The Id Of The Trainer To Be Edited
-    var TrainerId = $(TrainerEdited[0]).parents('div.row').attr("data-trainerid");
-    //From All Trainers Find The One With Matching Id
-    for (var i = 0; i < TrainersArray.length; i++) {
-        if (TrainersArray[i].id == TrainerId) {
-            //For Every Cell That Needs Edit Make The Changes Permanent To The TrainerArray
-            for (var j = 0; j < TrainerEdited.length; j++) {           
-                switch ($(TrainerEdited[j]).attr('name')) {
+function EditCourseFromDataBase(CourseEdited) {
+    //Get The Id Of The Course To Be Edited
+    var CourseId = $(CourseEdited[0]).parents('div.row').attr("data-courseid");
+    //From All Courses Find The One With Matching Id
+    for (var i = 0; i < CoursesArray.length; i++) {
+        if (CoursesArray[i].id == CourseId) {
+            //For Every Cell That Needs Edit Make The Changes Permanent To The CourseArray
+            for (var j = 0; j < CourseEdited.length; j++) {           
+                switch ($(CourseEdited[j]).attr('name')) {
                     case 'Fname':
-                        TrainersArray[i].Fname = $(TrainerEdited[j]).val();
-                        console.log(TrainersArray[i].Fname);
+                        CoursesArray[i].Fname = $(CourseEdited[j]).val();
+                        console.log(CoursesArray[i].Fname);
                         break;
                     case 'Lname':
-                        TrainersArray[i].Lname = $(TrainerEdited[j]).val();
+                        CoursesArray[i].Lname = $(CourseEdited[j]).val();
                         break;
                     case 'Subject':
-                        TrainersArray[i].Subject = $(TrainerEdited[j]).val();
+                        CoursesArray[i].Subject = $(CourseEdited[j]).val();
                         break;
                     default:
                         {}
@@ -177,7 +177,7 @@ function EditTrainerFromDataBase(TrainerEdited) {
 }
 
 
-function ToggleModalBodyCellTrainer(Element) {
+function ToggleModalBodyCellCourse(Element) {
     //Hides <p> and shows <input> And Reverse
     $(Element).css('display', 'none');
     $($(Element).siblings()).css('display', 'block');

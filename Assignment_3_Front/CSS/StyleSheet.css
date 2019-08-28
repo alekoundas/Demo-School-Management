@@ -5,12 +5,28 @@
 }
 
 .container {
-    background-color: rgba(228, 233, 255, 0.73);
+   background-color: rgba(228, 233, 255, 0.73);
 }
 
 
 img {
     height: 40px;
     width: auto;
-
 }
+
+#MainTable {
+    
+    border-radius: 25px;
+    padding: 0px;
+    /*background-color: rgba(228, 233, 255, 0.73);*/
+    position: relative;
+    top: 50px;
+}
+
+    #MainTable table {
+        width: 95%;
+        top: 5px;
+        margin: 0px auto;
+        position: relative;
+        /*background-color: rgba(212, 219, 248, 0.73);*/
+    }
