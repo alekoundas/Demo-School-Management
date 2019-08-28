@@ -23,7 +23,35 @@
         $(trow).append($.parseHTML("<td>" + StudentArray[i].Lname + "</td>"));
         $(trow).append($.parseHTML("<td>" + StudentArray[i].Tuition + "</td>"));
         $(trow).append($.parseHTML("<td>" + StudentArray[i].Birth.getFullYear() + "</td>"));
-        $(trow).append($.parseHTML("<td> <button onclick='EditRow(this,"+StudentArray[i].id+");'data-toggle='modal' data-target='#editElementModal' class='btn btn-primary'>Edit</button><button class='btn btn-danger'>Delete</button> </td>"));
+
+        $(trow).append($.parseHTML("<td>"
+            + "<button onclick = 'EditRowStudent(this," + StudentArray[i].id + ");' data-toggle = 'modal' data-target='#editElementModal'   class = 'btn btn-primary' > Edit</button >"
+            + "<button onclick = 'DeleteRowStudent(" + StudentArray[i].id + ");'    data-toggle = 'modal' data-target='#deleteElementModal' class = 'btn btn-danger'  > Delete</button > " 
+            + "</td > "
+        ));
 
     }
 }
+
+function EditRowStudent(row, StudentId) {
+    $("#EditStudentModal").modal("show");//show modal 
+
+    //Add data- To The row Of The Modal Body With The Student Id
+    //So I Can Retrieve It Later
+    $(".modal-body .row").attr("data-studentid", StudentId);
+
+    //Retrieve Data From table
+    var fname = $(row).parent().siblings("td:eq( 1 )").text();
+    var lname = $(row).parent().siblings("td:eq( 2 )").text();
+    var tuition = $(row).parent().siblings("td:eq( 3 )").text()
+    var Birth = $(row).parent().siblings("td:eq( 4 )").text()
+
+    $('#ModalTitle').text(fname + "  " + lname);
+    $('#ModalBodyFname').text(fname);
+    $('#ModalBodyLname').text(lname);
+    $('#ModalBodyTuition').text(tuition);
+    $('#ModalBodyBirth').text(Birth);
+}
+
+
+

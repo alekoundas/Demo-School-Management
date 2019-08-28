@@ -1,9 +1,4 @@
-﻿
-
-//Database  ¯\_(ツ)_/¯
-var StudentsArray = [];
-
-function GetStudentTable() {
+﻿function GetStudentTable() {
 
     //Fill Array If Empty
     if (StudentsArray.length == 0)
@@ -13,15 +8,17 @@ function GetStudentTable() {
     //Only If The Divs Doesnt Exist Yet
     if (document.getElementById("EditElementModal") == null) {
         $("body").append('<div id="EditElementModal">');
-        $("#EditElementModal").append(GetEditModal()); //Append Completed modal to empty div
+        $("#EditElementModal").append(GetEditModalStudent()); //Append Completed modal to empty div
     }
     if (document.getElementById("AddElementModal") == null) {
         $("body").append('<div id="AddElementModal">');
-        $("#AddElementModal").append(GetAddModal()); //Append Completed modal to empty div
+        $("#AddElementModal").append(GetAddModalStudent()); //Append Completed modal to empty div
     }
-
+    if(document.getElementById("DeleteElementModal") == null) {
+        $("body").append('<div id="DeleteElementModal">');
+        $("#DeleteElementModal").append(GetDeleteModalStudent()); //Append Completed modal to empty div
+    }
     StudentTable(StudentsArray);
-    
 }
 
 

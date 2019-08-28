@@ -78,7 +78,14 @@
     <Content Include="CSS\ResetCss.css" />
     <Content Include="CSS\StyleSheet.css" />
     <Content Include="index.html" />
+    <Content Include="JavaScript\Trainer\AddTrainerModal.js" />
+    <Content Include="JavaScript\Trainer\DeleteTrainerModal.js" />
+    <Content Include="JavaScript\Trainer\EditTrainerModal.js" />
+    <Content Include="JavaScript\Trainer\Trainer.js" />
+    <Content Include="JavaScript\Trainer\TrainerTable.html" />
+    <Content Include="JavaScript\Trainer\TrainerTable.js" />
     <Content Include="JavaScript\Student\AddStudentModal.js" />
+    <Content Include="JavaScript\Student\DeleteStudentModal.js" />
     <Content Include="JavaScript\Student\EditStudentModal.js" />
     <Content Include="JavaScript\main.js" />
     <Content Include="JavaScript\Student\Student.js" />

@@ -9,7 +9,15 @@
     <script src="JavaScript/Student/Student.js"></script>
     <script src="JavaScript/Student/StudentTable.js"></script>
     <script src="JavaScript/Student/EditStudentModal.js"></script>
-    <script src="JavaScript/Student/AddStudentModal.js"></script>
+    <script src="JavaScript/Student/AddStudentModal.js"></script> 
+    <script src="JavaScript/Student/DeleteStudentModal.js"></script>
+
+    <script src="JavaScript/Trainer/Trainer.js"></script>
+    <script src="JavaScript/Trainer/TrainerTable.js"></script>
+    <script src="JavaScript/Trainer/AddTrainerModal.js"></script>
+    <script src="JavaScript/Trainer/DeleteTrainerModal.js"></script>
+    <script src="JavaScript/Trainer/EditTrainerModal.js"></script>
+    
 
     <link href="CSS/ResetCss.css" rel="stylesheet" />
     <link href="CSS/StyleSheet.css" rel="stylesheet" />
@@ -29,13 +37,13 @@
                 <a class="navbar-brand" href="#">
                     <img src="PeopleCert Logo.png" alt="PeopleCert Logo" />
                 </a>
-                <a class="navbar-brand" href="#">Students</a>
-                <a class="navbar-brand" href="#">Trainers</a>
-                <a class="navbar-brand" href="#">Courses</a>
-                <a class="navbar-brand" href="#">Assignments</a>
+                <a class="navbar-brand" onclick = "GetPage('Student');" href="#">Students</a>
+                <a class="navbar-brand" onclick = "GetPage('Trainer');" href="#">Trainers</a>
+                <a class="navbar-brand" onclick = "GetPage('Course');" href="#">Courses</a>
+                <a class="navbar-brand" onclick = "GetPage('Assignment');" href="#">Assignments</a>
             </nav>
         </div>
-        <div id="StudentTable" class="container"></div>
+        <div id="MainTable" class="container"></div>
     </div>
 
 

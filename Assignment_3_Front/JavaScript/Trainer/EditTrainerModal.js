@@ -1,4 +1,4 @@
-﻿function GetEditModalStudent() {
+﻿function GetEditModalTrainer() {
 
 
     var BaseModal = $.parseHTML("<div class='modal fade' id='editElementModal' tabindex='-1' role='dialog' ></div>");
@@ -13,22 +13,21 @@
 
     //Modal Body Build Here
     var ModalBody = $.parseHTML("<div class='modal-body'></div>");
-    var ModalBodyRowGrid = $.parseHTML("<div class='row'></div>");//Add data-studentid From EditRow()
+    var ModalBodyRowGrid = $.parseHTML("<div class='row'></div>");//Add data-trainerid From EditRow()
     var ModalBodyColGrid = $.parseHTML("<div class='col-3'></div>");
-    var ModalBodyFname = $.parseHTML("  <p onclick='ToggleModalBodyCellStudent(this);' id='ModalBodyFname'>  </p>");
-    var ModalBodyLname = $.parseHTML("  <p onclick='ToggleModalBodyCellStudent(this);' id='ModalBodyLname'>  </p>");
-    var ModalBodyTuition = $.parseHTML("<p onclick='ToggleModalBodyCellStudent(this);' id='ModalBodyTuition'></p>");
-    var ModalBodyBirth = $.parseHTML("  <p onclick='ToggleModalBodyCellStudent(this);' id='ModalBodyBirth'>  </p>");
+    var ModalBodyFname = $.parseHTML("  <p onclick='ToggleModalBodyCellTrainer(this);' id='ModalBodyFname'>  </p>");
+    var ModalBodyLname = $.parseHTML("  <p onclick='ToggleModalBodyCellTrainer(this);' id='ModalBodyLname'>  </p>");
+    var ModalBodySubject = $.parseHTML("<p onclick='ToggleModalBodyCellTrainer(this);' id='ModalBodySubject'></p>");
     var ModalBodyInputFname = $.parseHTML("  <input type='text' name='Fname'    id='EditModalBodyInputFname'  style = 'display:none;' class='form-control'  >");
     var ModalBodyInputLname = $.parseHTML("  <input type='text' name='Lname'    id='EditModalBodyInputLname'  style = 'display:none;' class='form-control'  >");
-    var ModalBodyInputTuition = $.parseHTML("<input type='text' name='Tuition'  id='EditModalBodyInputTuition'style = 'display:none;' class='form-control'  >");
-    var ModalBodyInputBirth = $.parseHTML("  <input type='date' name='Birth'    id='EditModalBodyInputBirth'  style = 'display:none;' class='form-control'  >");
+    var ModalBodyInputSubject = $.parseHTML("<input type='text' name='Subject'  id='EditModalBodyInputSubject'style = 'display:none;' class='form-control'  >");
+    
 
 
     //Modal Footer Build Here
     var ModalFooter = $.parseHTML("<div class='modal-footer'></div>");
     var ModalFooterCancelbt = $.parseHTML("<button type='button' class='btn btn-danger  mr-auto' data-dismiss='modal'>Cancel</button>");
-    var ModalFooterUpdatebt = $.parseHTML("<button type='button' class='btn btn-success' onclick='SubmitEditButtonStudent(this);RefreshStudentHtml();'>Update</button>");
+    var ModalFooterUpdatebt = $.parseHTML("<button type='button' class='btn btn-success' onclick='SubmitEditButtonTrainer(this);RefreshTrainerHtml();'>Update</button>");
 
 
 
@@ -59,14 +58,9 @@
     $(ModalBodyInputLname).remove();
 
     //Bootstrap Col
-    $(ModalBodyColGrid).append(ModalBodyInputTuition);
-    $(ModalBodyColGrid).clone().appendTo(ModalBodyRowGrid).append(ModalBodyTuition);
-    $(ModalBodyInputTuition).remove();
-
-    //Bootstrap Col
-    $(ModalBodyColGrid).append(ModalBodyInputBirth);
-    $(ModalBodyColGrid).clone().appendTo(ModalBodyRowGrid).append(ModalBodyBirth);
-    $(ModalBodyInputBirth).remove();
+    $(ModalBodyColGrid).append(ModalBodyInputSubject);
+    $(ModalBodyColGrid).clone().appendTo(ModalBodyRowGrid).append(ModalBodySubject);
+    $(ModalBodyInputSubject).remove();
 
     //Footer
     $(ModalCotent).append(ModalFooter);
@@ -81,33 +75,29 @@
 
 
 
-function SubmitEditButtonStudent(ButtonObj) {
+function SubmitEditButtonTrainer(ButtonObj) {
 
     //Get Values From Inputs
     var Firstname = $('#EditModalBodyInputFname').val();
     var Lastname = $('#EditModalBodyInputLname').val();
-    var Tuition = $('#EditModalBodyInputTuition').val();
-    var Birth = $('#EditModalBodyInputBirth').val();
+    var Subject = $('#EditModalBodyInputSubject').val();
+
 
 
     //Initiate Regular Expretions
     var StringExp = new RegExp("^[A-Za-z]{3,15}$", '');
-    var NumberExp = new RegExp("^[0-9]{1,6}$", '');
-    var DateExp = new RegExp("^\s*([1-2][90][0-9]{2})\-(0?[1-9]|1[012])\-(3[01]|[012][0-9]|[1-9])\s*$", '');
 
 
     //Run Tests
     var ResultFname = StringExp.test(Firstname);
     var ResultLname = StringExp.test(Lastname);
-    var ResultTuition = NumberExp.test(Tuition);
-    var ResultBirth = DateExp.test(Birth);
+    var ResultSubject = StringExp.test(Subject);
 
 
     //Turn To red-green The Input Border Color Of The Wrong-Correct RegEx Inputs
     (ResultFname) ? $('  #EditModalBodyInputFname  ').removeClass("is-invalid").addClass("is-valid") : $('#EditModalBodyInputFname  ').removeClass("is-valid").addClass("is-invalid");
     (ResultLname) ? $('  #EditModalBodyInputLname  ').removeClass("is-invalid").addClass("is-valid") : $('#EditModalBodyInputLname  ').removeClass("is-valid").addClass("is-invalid");
-    (ResultTuition) ? $('#EditModalBodyInputTuition').removeClass("is-invalid").addClass("is-valid") : $('#EditModalBodyInputTuition').removeClass("is-valid").addClass("is-invalid");
-    (ResultBirth) ? $('  #EditModalBodyInputBirth  ').removeClass("is-invalid").addClass("is-valid") : $('#EditModalBodyInputBirth  ').removeClass("is-valid").addClass("is-invalid");
+    (ResultSubject) ? $('#EditModalBodyInputSubject').removeClass("is-invalid").addClass("is-valid") : $('#EditModalBodyInputSubject').removeClass("is-valid").addClass("is-invalid");
 
 
     //Get An Array Of Every <input> In That Modal
@@ -116,11 +106,9 @@ function SubmitEditButtonStudent(ButtonObj) {
     //Check Every <input> If Its Empty Or Has Incorrect Input
     var EditedInputsOnly = [];
     var InputAreasComplete = true;
-    for (var i = 0; i < ModalBodyCellArray.length; i++)
-    {
+    for (var i = 0; i < ModalBodyCellArray.length; i++) {
         //Compare The input By name 
-        if ($(ModalBodyCellArray[i]).is(':visible'))
-        {
+        if ($(ModalBodyCellArray[i]).is(':visible')) {
             switch ($(ModalBodyCellArray[i]).attr('name')) {
                 case 'Fname':
                     if (ResultFname) {
@@ -136,15 +124,8 @@ function SubmitEditButtonStudent(ButtonObj) {
                     }
                     InputAreasComplete = false;
                     break;
-                case 'Tuition':
-                    if (ResultTuition) {
-                        EditedInputsOnly.push(ModalBodyCellArray[i]);
-                        break;
-                    }
-                    InputAreasComplete = false;
-                    break;
-                case 'Birth':
-                    if (ResultBirth) {
+                case 'Subject':
+                    if (ResultSubject) {
                         EditedInputsOnly.push(ModalBodyCellArray[i]);
                         break;
                     }
@@ -156,39 +137,38 @@ function SubmitEditButtonStudent(ButtonObj) {
         }
     }
     //Check If Every Input Has Correct Val In It
-    if (InputAreasComplete)
-    {      
+    if (InputAreasComplete) {
+        
         for (var i = 0; i < EditedInputsOnly.length; i++)//Hides The Correct input And Show The p
-            ToggleModalBodyCellStudent(EditedInputsOnly[i]);
-      
-        EditStudent(EditedInputsOnly); //Edit Student Attributes       
+            ToggleModalBodyCellTrainer(EditedInputsOnly[i]);
+
+        EditTrainerFromDataBase(EditedInputsOnly); //Edit Trainer Attributes  
         ResetModals();
     }
 }
 
 
 
-function EditStudent(StudentEdited) {
-    //Get The Id Of The Student To Be Edited
-    var StudentId = $(StudentEdited[0]).parents('div.row').attr("data-studentid");
-
-    //From All Students Find The One With Matching Id
-    for (var i = 0; i < StudentsArray.length; i++) {
-        if (StudentsArray[i].id == StudentId) {
-            //For Every Cell That Needs Edit Make The Changes Permanent To The StudentArray
-            for (var j = 0; j < StudentEdited.length; j++) {
-                switch ($(StudentEdited[j]).attr('name')) {
+function EditTrainerFromDataBase(TrainerEdited) {
+    console.log(TrainerEdited);
+    //Get The Id Of The Trainer To Be Edited
+    var TrainerId = $(TrainerEdited[0]).parents('div.row').attr("data-trainerid");
+    //From All Trainers Find The One With Matching Id
+    for (var i = 0; i < TrainersArray.length; i++) {
+        if (TrainersArray[i].id == TrainerId) {
+            //For Every Cell That Needs Edit Make The Changes Permanent To The TrainerArray
+            for (var j = 0; j < TrainerEdited.length; j++) {           
+                switch ($(TrainerEdited[j]).attr('name')) {
                     case 'Fname':
-                        StudentsArray[i].Fname = $(StudentEdited[j]).val();
+                        TrainersArray[i].Fname = $(TrainerEdited[j]).val();
+                        console.log(TrainersArray[i].Fname);
                         break;
                     case 'Lname':
-                        StudentsArray[i].Lname = $(StudentEdited[j]).val();
+                        TrainersArray[i].Lname = $(TrainerEdited[j]).val();
                         break;
-                    case 'Tuition':
-                        StudentsArray[i].Tuition = $(StudentEdited[j]).val();
-                        break;
-                    case 'Birth':
-                        StudentsArray[i].Birth = new Date($(StudentEdited[j]).val());
+                    case 'Subject':
+                        TrainersArray[i].Subject = $(TrainerEdited[j]).val();
+                        console.log(TrainersArray[i].Subject);
                         break;
                     default:
                         {}
@@ -199,7 +179,7 @@ function EditStudent(StudentEdited) {
 }
 
 
-function ToggleModalBodyCellStudent(Element) {
+function ToggleModalBodyCellTrainer(Element) {
     //Hides <p> and shows <input> And Reverse
     $(Element).css('display', 'none');
     $($(Element).siblings()).css('display', 'block');
@@ -207,5 +187,8 @@ function ToggleModalBodyCellStudent(Element) {
     //toggle() Or .show-hide() Removes The in-line css display from element
     //So i Cant Check The Value Of display
 }
+
+
+
 
 
