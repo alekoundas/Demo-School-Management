@@ -13,15 +13,18 @@
 
     //Modal Body Build Here
     var ModalBody = $.parseHTML("<div class='modal-body'></div>");
-    var ModalBodyRowGrid = $.parseHTML("<div class='row'></div>");//Add data-cousrid From EditRow()
+    var ModalBodyRowGrid = $.parseHTML("<div class='row'></div>");//Add data-Courseid From EditRow()
     var ModalBodyColGrid = $.parseHTML("<div class='col-3'></div>");
-    var ModalBodyFname = $.parseHTML("  <p onclick='ToggleModalBodyCellCourse(this);' id='ModalBodyFname'>  </p>");
-    var ModalBodyLname = $.parseHTML("  <p onclick='ToggleModalBodyCellCourse(this);' id='ModalBodyLname'>  </p>");
-    var ModalBodySubject = $.parseHTML("<p onclick='ToggleModalBodyCellCourse(this);' id='ModalBodySubject'></p>");
-    var ModalBodyInputFname = $.parseHTML("  <input type='text' name='Fname'    id='EditModalBodyInputFname'  style = 'display:none;' class='form-control'  >");
-    var ModalBodyInputLname = $.parseHTML("  <input type='text' name='Lname'    id='EditModalBodyInputLname'  style = 'display:none;' class='form-control'  >");
-    var ModalBodyInputSubject = $.parseHTML("<input type='text' name='Subject'  id='EditModalBodyInputSubject'style = 'display:none;' class='form-control'  >");
-    
+    var ModalBodyTitle = $.parseHTML(" <p onclick='ToggleModalBodyCellCourse(this);' id='ModalBodyTitle'>  </p>");
+    var ModalBodyStream = $.parseHTML("<p onclick='ToggleModalBodyCellCourse(this);' id='ModalBodyStream'> </p>");
+    var ModalBodyType = $.parseHTML("  <p onclick='ToggleModalBodyCellCourse(this);' id='ModalBodyType'>   </p>");
+    var ModalBodyStartD = $.parseHTML("<p onclick='ToggleModalBodyCellCourse(this);' id='ModalBodyStartD'> </p>");
+    var ModalBodyEndD = $.parseHTML("  <p onclick='ToggleModalBodyCellCourse(this);' id='ModalBodyEndD'>   </p>");
+    var ModalBodyInputTitle = $.parseHTML(" <input type='text' name='Title'  id='EditModalBodyInputTitle'  style = 'display:none;' class='form-control'  >");
+    var ModalBodyInputStream = $.parseHTML("<input type='text' name='Stream' id='EditModalBodyInputStream' style = 'display:none;' class='form-control'  >");
+    var ModalBodyInputType = $.parseHTML("  <input type='text' name='Type'   id='EditModalBodyInputType'   style = 'display:none;' class='form-control'  >");
+    var ModalBodyInputStartD = $.parseHTML("<input type='date' name='StartD' id='EditModalBodyInputStartD' style = 'display:none;' class='form-control'  >");
+    var ModalBodyInputEndD = $.parseHTML("  <input type='date' name='EndD'   id='EditModalBodyInputEndD'   style = 'display:none;' class='form-control'  >");
 
 
     //Modal Footer Build Here
@@ -48,19 +51,29 @@
     $(ModalBody).append(ModalBodyRowGrid);
 
     //Bootstrap Col
-    $(ModalBodyColGrid).append(ModalBodyInputFname);
-    $(ModalBodyColGrid).clone().appendTo(ModalBodyRowGrid).append(ModalBodyFname);
-    $(ModalBodyInputFname).remove();//Remove the input because clone() will cary any next inputs with it
+    $(ModalBodyColGrid).append(ModalBodyInputTitle);
+    $(ModalBodyColGrid).clone().appendTo(ModalBodyRowGrid).append(ModalBodyTitle);
+    $(ModalBodyInputTitle).remove();//Remove the input because clone() will cary any next inputs with it
 
     //Bootstrap Col
-    $(ModalBodyColGrid).append(ModalBodyInputLname);
-    $(ModalBodyColGrid).clone().appendTo(ModalBodyRowGrid).append(ModalBodyLname);
-    $(ModalBodyInputLname).remove();
+    $(ModalBodyColGrid).append(ModalBodyInputStream);
+    $(ModalBodyColGrid).clone().appendTo(ModalBodyRowGrid).append(ModalBodyStream);
+    $(ModalBodyInputStream).remove();
 
     //Bootstrap Col
-    $(ModalBodyColGrid).append(ModalBodyInputSubject);
-    $(ModalBodyColGrid).clone().appendTo(ModalBodyRowGrid).append(ModalBodySubject);
-    $(ModalBodyInputSubject).remove();
+    $(ModalBodyColGrid).append(ModalBodyInputType);
+    $(ModalBodyColGrid).clone().appendTo(ModalBodyRowGrid).append(ModalBodyType);
+    $(ModalBodyInputType).remove();
+
+    //Bootstrap Col
+    $(ModalBodyColGrid).append(ModalBodyInputStartD);
+    $(ModalBodyColGrid).clone().appendTo(ModalBodyRowGrid).append(ModalBodyStartD);
+    $(ModalBodyInputStartD).remove();
+
+    //Bootstrap Col
+    $(ModalBodyColGrid).append(ModalBodyInputEndD);
+    $(ModalBodyColGrid).clone().appendTo(ModalBodyRowGrid).append(ModalBodyEndD);
+    $(ModalBodyInputEndD).remove();
 
     //Footer
     $(ModalCotent).append(ModalFooter);
@@ -73,31 +86,65 @@
 
 
 
+function EditRowCourse(row, CourseId) {
+    $("#EditCourseModal").modal("show");//show modal 
+
+    //Add data- To The row Of The Modal Body With The Course Id
+    //So I Can Retrieve It Later
+    $(".modal-body .row").attr("data-courseid", CourseId);
+
+    //Retrieve Data From table
+    var Title = $(row).parent().siblings("td:eq( 1 )").text();
+    var Stream = $(row).parent().siblings("td:eq( 2 )").text();
+    var Type = $(row).parent().siblings("td:eq( 3 )").text();
+    var StartD = $(row).parent().siblings("td:eq( 4 )").text();
+    var EndD = $(row).parent().siblings("td:eq( 5 )").text();
+
+    $('#ModalTitle').text(Title);
+    $('#ModalBodyTitle').text(Title);
+    $('#ModalBodyStream').text(Stream);
+    $('#ModalBodyType').text(Type);
+    $('#ModalBodyStartD').text(StartD);
+    $('#ModalBodyEndD').text(EndD);
+
+}
+
+
 
 
 function SubmitEditButtonCourse(ButtonObj) {
 
     //Get Values From Inputs
-    var Firstname = $('#EditModalBodyInputFname').val();
-    var Lastname = $('#EditModalBodyInputLname').val();
-    var Subject = $('#EditModalBodyInputSubject').val();
-
-
+    var Title = $('#EditModalBodyInputTitle').val();
+    var Stream = $('#EditModalBodyInputStream').val();
+    var Type = $('#EditModalBodyInputType').val();
+    var StartD = $('#EditModalBodyInputStartD').val();
+    var EndD = $('#EditModalBodyInputEndD').val();
+    console.log(Title);
+    console.log(Stream);
+    console.log(Type);
+    console.log(StartD);
+    console.log(EndD);
 
     //Initiate Regular Expretions
     var StringExp = new RegExp("^[A-Za-z]{3,15}$", '');
+    var DateExp = new RegExp("^\s*([1-2][90][0-9]{2})\-(0?[1-9]|1[012])\-(3[01]|[012][0-9]|[1-9])\s*$", '');
 
 
     //Run Tests
-    var ResultFname = StringExp.test(Firstname);
-    var ResultLname = StringExp.test(Lastname);
-    var ResultSubject = StringExp.test(Subject);
+    var ResultTitle = StringExp.test(Title);
+    var ResultStream = StringExp.test(Stream);
+    var ResultType = StringExp.test(Type);
+    var ResultStartD = DateExp.test(StartD);
+    var ResultEndD = DateExp.test(EndD);
 
 
     //Turn To red-green The Input Border Color Of The Wrong-Correct RegEx Inputs
-    (ResultFname) ? $('  #EditModalBodyInputFname  ').removeClass("is-invalid").addClass("is-valid") : $('#EditModalBodyInputFname  ').removeClass("is-valid").addClass("is-invalid");
-    (ResultLname) ? $('  #EditModalBodyInputLname  ').removeClass("is-invalid").addClass("is-valid") : $('#EditModalBodyInputLname  ').removeClass("is-valid").addClass("is-invalid");
-    (ResultSubject) ? $('#EditModalBodyInputSubject').removeClass("is-invalid").addClass("is-valid") : $('#EditModalBodyInputSubject').removeClass("is-valid").addClass("is-invalid");
+    (ResultTitle) ? $('  #EditModalBodyInputTitle  ').removeClass("is-invalid").addClass("is-valid") : $('#EditModalBodyInputTitle  ').removeClass("is-valid").addClass("is-invalid");
+    (ResultStream) ? $('  #EditModalBodyInputStream  ').removeClass("is-invalid").addClass("is-valid") : $('#EditModalBodyInputStream  ').removeClass("is-valid").addClass("is-invalid");
+    (ResultType) ? $('#EditModalBodyInputType').removeClass("is-invalid").addClass("is-valid") : $('#EditModalBodyInputType').removeClass("is-valid").addClass("is-invalid");
+    (ResultStartD) ? $('  #EditModalBodyInputStartD  ').removeClass("is-invalid").addClass("is-valid") : $('#EditModalBodyInputStartD  ').removeClass("is-valid").addClass("is-invalid");
+    (ResultEndD) ? $('  #EditModalBodyInputEndD  ').removeClass("is-invalid").addClass("is-valid") : $('#EditModalBodyInputEndD  ').removeClass("is-valid").addClass("is-invalid");
 
 
     //Get An Array Of Every <input> In That Modal
@@ -110,22 +157,36 @@ function SubmitEditButtonCourse(ButtonObj) {
         //Compare The input By name 
         if ($(ModalBodyCellArray[i]).is(':visible')) {
             switch ($(ModalBodyCellArray[i]).attr('name')) {
-                case 'Fname':
-                    if (ResultFname) {
+                case 'Title':
+                    if (ResultTitle) {
                         EditedInputsOnly.push(ModalBodyCellArray[i]);
                         break;
                     }
                     InputAreasComplete = false;
                     break;
-                case 'Lname':
-                    if (ResultLname) {
+                case 'Stream':
+                    if (ResultStream) {
                         EditedInputsOnly.push(ModalBodyCellArray[i]);
                         break;
                     }
                     InputAreasComplete = false;
                     break;
-                case 'Subject':
-                    if (ResultSubject) {
+                case 'Type':
+                    if (ResultType) {
+                        EditedInputsOnly.push(ModalBodyCellArray[i]);
+                        break;
+                    }
+                    InputAreasComplete = false;
+                    break;
+                case 'StartD':
+                    if (ResultStartD) {
+                        EditedInputsOnly.push(ModalBodyCellArray[i]);
+                        break;
+                    }
+                    InputAreasComplete = false;
+                    break;
+                case 'EndD':
+                    if (ResultEndD) {
                         EditedInputsOnly.push(ModalBodyCellArray[i]);
                         break;
                     }
@@ -138,38 +199,43 @@ function SubmitEditButtonCourse(ButtonObj) {
     }
     //Check If Every Input Has Correct Val In It
     if (InputAreasComplete) {
-        
         for (var i = 0; i < EditedInputsOnly.length; i++)//Hides The Correct input And Show The p
             ToggleModalBodyCellCourse(EditedInputsOnly[i]);
 
-        EditCourseFromDataBase(EditedInputsOnly); //Edit Course Attributes  
+        EditCourse(EditedInputsOnly); //Edit Course Attributes       
         ResetModals();
     }
 }
 
 
 
-function EditCourseFromDataBase(CourseEdited) {
+function EditCourse(CourseEdited) {
     //Get The Id Of The Course To Be Edited
-    var CourseId = $(CourseEdited[0]).parents('div.row').attr("data-courseid");
+    var CourseId = $(CourseEdited[0]).parents('div.row').attr("data-Courseid");
+
     //From All Courses Find The One With Matching Id
     for (var i = 0; i < CoursesArray.length; i++) {
         if (CoursesArray[i].id == CourseId) {
             //For Every Cell That Needs Edit Make The Changes Permanent To The CourseArray
-            for (var j = 0; j < CourseEdited.length; j++) {           
+            for (var j = 0; j < CourseEdited.length; j++) {
                 switch ($(CourseEdited[j]).attr('name')) {
-                    case 'Fname':
-                        CoursesArray[i].Fname = $(CourseEdited[j]).val();
-                        console.log(CoursesArray[i].Fname);
+                    case 'Title':
+                        CoursesArray[i].Title = $(CourseEdited[j]).val();
                         break;
-                    case 'Lname':
-                        CoursesArray[i].Lname = $(CourseEdited[j]).val();
+                    case 'Stream':
+                        CoursesArray[i].Stream = $(CourseEdited[j]).val();
                         break;
-                    case 'Subject':
-                        CoursesArray[i].Subject = $(CourseEdited[j]).val();
+                    case 'Type':
+                        CoursesArray[i].Type = $(CourseEdited[j]).val();
+                        break;
+                    case 'StartD':
+                        CoursesArray[i].StartD = new Date($(CourseEdited[j]).val());
+                        break;
+                    case 'EndD':
+                        CoursesArray[i].EndD = new Date($(CourseEdited[j]).val());
                         break;
                     default:
-                        {}
+                        { }
                 }
             }
         }
@@ -185,8 +251,3 @@ function ToggleModalBodyCellCourse(Element) {
     //toggle() Or .show-hide() Removes The in-line css display from element
     //So i Cant Check The Value Of display
 }
-
-
-
-
-

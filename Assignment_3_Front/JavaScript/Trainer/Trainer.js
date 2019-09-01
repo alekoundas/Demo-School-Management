@@ -21,6 +21,14 @@
     TrainerTable(TrainersArray);
 }
 
+function GetTrainerTableMinimal(Id) {
+
+    //Fill Array If Empty
+    if (TrainersArray.length == 0)
+        DummyTrainers(TrainersArray);
+
+    TrainerTableMinimal(Id);
+}
 
 
 

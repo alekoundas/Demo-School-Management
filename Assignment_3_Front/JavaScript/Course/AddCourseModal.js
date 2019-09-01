@@ -1,6 +1,6 @@
 ﻿function GetAddModalCourse() {
 
-    var BaseModal = $.parseHTML("<div class='modal fade' id='addElementModal' tabindex='-1' role='dialog' aria-labelledby='exampleModalCenterTitle' aria-hidden='false'></div>");
+    var BaseModal = $.parseHTML("<div class='modal fade' id='addElementModal' tabindex='-1' role='dialog'></div>");
     var ModalDialog = $.parseHTML("<div class='modal-dialog modal-dialog-centered modal-lg' role='document'></div>");
     var ModalCotent = $.parseHTML("<div class='modal-content'></div>");
 
@@ -14,9 +14,11 @@
     var ModalBody = $.parseHTML("<div class='modal-body'></div>");
     var ModalBodyRowGrid = $.parseHTML("<div class='row'></div>");//Add data-Courseid From EditRow()
     var ModalBodyColGrid = $.parseHTML("<div class='col-3'></div>");
-    var ModalBodyInputFname = $.parseHTML("  <input type='text' name='Fname'   class='form-control'  id='AddModalBodyInputFname'     >");
-    var ModalBodyInputLname = $.parseHTML("  <input type='text' name='Lname'   class='form-control'  id='AddModalBodyInputLname'     >");
-    var ModalBodyInputSubject = $.parseHTML("<input type='text' name='Subject' class='form-control'  id='AddModalBodyInputSubject'   >");
+    var ModalBodyInputTitle = $.parseHTML(" <input type='text' name='Title'  id='AddModalBodyInputTitle'   class='form-control'  >");
+    var ModalBodyInputStream = $.parseHTML("<input type='text' name='Stream' id='AddModalBodyInputStream'  class='form-control'  >");
+    var ModalBodyInputType = $.parseHTML("  <input type='text' name='Type'   id='AddModalBodyInputType'    class='form-control'  >");
+    var ModalBodyInputStartD = $.parseHTML("<input type='date' name='StartD' id='AddModalBodyInputStartD'  class='form-control'  >");
+    var ModalBodyInputEndD = $.parseHTML("  <input type='date' name='EndD'   id='AddModalBodyInputEndD'    class='form-control'  >");
 
 
     //Modal Footer Build Here
@@ -44,19 +46,28 @@
     $(ModalBody).append(ModalBodyRowGrid);
 
     //Bootstrap Col 
-    $(ModalBodyColGrid).append(ModalBodyInputFname);
+    $(ModalBodyColGrid).append(ModalBodyInputTitle);
     $(ModalBodyColGrid).clone().appendTo(ModalBodyRowGrid);
-    $(ModalBodyInputFname).remove();//Remove the input because clone() will cary any next inputs with it
+    $(ModalBodyInputTitle).remove();//Remove the input because clone() will cary any next inputs with it
 
     //Bootstrap Col
-    $(ModalBodyColGrid).append(ModalBodyInputLname);
+    $(ModalBodyColGrid).append(ModalBodyInputStream);
     $(ModalBodyColGrid).clone().appendTo(ModalBodyRowGrid);
-    $(ModalBodyInputLname).remove();
+    $(ModalBodyInputStream).remove();
 
     //Bootstrap Col
-    $(ModalBodyColGrid).append(ModalBodyInputSubject);
+    $(ModalBodyColGrid).append(ModalBodyInputType);
     $(ModalBodyColGrid).clone().appendTo(ModalBodyRowGrid);
-    $(ModalBodyInputSubject).remove();
+    $(ModalBodyInputType).remove();
+
+    //Bootstrap Col
+    $(ModalBodyColGrid).append(ModalBodyInputStartD);
+    $(ModalBodyColGrid).clone().appendTo(ModalBodyRowGrid);
+    $(ModalBodyInputStartD).remove();
+    //Bootstrap Col
+    $(ModalBodyColGrid).append(ModalBodyInputEndD);
+    $(ModalBodyColGrid).clone().appendTo(ModalBodyRowGrid);
+    $(ModalBodyInputEndD).remove();
 
     //Footer
     $(ModalCotent).append(ModalFooter);
@@ -85,57 +96,70 @@ function AddCourse() {
 function SubmitAddCourse(ButtonObj) {
 
     //Get Values From Inputs
-    var Firstname = $('#AddModalBodyInputFname').val();
-    var Lastname = $('#AddModalBodyInputLname').val();
-    var Subject = $('#AddModalBodyInputSubject').val();
-
+    var Title = $('#AddModalBodyInputTitle').val();
+    var Stream = $('#AddModalBodyInputStream').val();
+    var Type = $('#AddModalBodyInputType').val();
+    var StartD = $('#AddModalBodyInputStartD').val();
+    var EndD = $('#AddModalBodyInputEndD').val();
 
     //Initiate Regular Expretions
     var StringExp = new RegExp("^[A-Za-z]{3,15}$", '');
+    var DateExp = new RegExp("^\s*([1-2][90][0-9]{2})\-(0?[1-9]|1[012])\-(3[01]|[012][0-9]|[1-9])\s*$", '');
 
     //Run Tests
-    var ResultFname = StringExp.test(Firstname);
-    var ResultLname = StringExp.test(Lastname);
-    var ResultSubject = StringExp.test(Subject);
+    var ResultTitle = StringExp.test(Title);
+    var ResultStream = StringExp.test(Stream);
+    var ResultType = StringExp.test(Type);
+    var ResultStartD = DateExp.test(StartD);
+    var ResultEndD = DateExp.test(EndD);
 
 
 
     //Turn To red-green The Input Border Color Of The Wrong-Correct RegEx Inputs
-    (ResultFname) ? $('  #AddModalBodyInputFname  ').removeClass("is-invalid").addClass("is-valid") : $('#AddModalBodyInputFname  ').removeClass("is-valid").addClass("is-invalid");
-    (ResultLname) ? $('  #AddModalBodyInputLname  ').removeClass("is-invalid").addClass("is-valid") : $('#AddModalBodyInputLname  ').removeClass("is-valid").addClass("is-invalid");
-    (ResultSubject) ? $('#AddModalBodyInputSubject').removeClass("is-invalid").addClass("is-valid") : $('#AddModalBodyInputSubject').removeClass("is-valid").addClass("is-invalid");
+    (ResultTitle) ? $('  #AddModalBodyInputTitle  ').removeClass("is-invalid").addClass("is-valid") : $('#AddModalBodyInputTitle  ').removeClass("is-valid").addClass("is-invalid");
+    (ResultStream) ? $('  #AddModalBodyInputStream  ').removeClass("is-invalid").addClass("is-valid") : $('#AddModalBodyInputStream  ').removeClass("is-valid").addClass("is-invalid");
+    (ResultType) ? $('#AddModalBodyInputType').removeClass("is-invalid").addClass("is-valid") : $('#AddModalBodyInputType').removeClass("is-valid").addClass("is-invalid");
+    (ResultStartD) ? $('  #AddModalBodyInputStartD  ').removeClass("is-invalid").addClass("is-valid") : $('#AddModalBodyInputStartD  ').removeClass("is-valid").addClass("is-invalid");
+    (ResultEndD) ? $('  #AddModalBodyInputEndD  ').removeClass("is-invalid").addClass("is-valid") : $('#AddModalBodyInputEndD  ').removeClass("is-valid").addClass("is-invalid");
 
 
     //Get An Array Of Every <input> In That Modal
     var ModalBodyCellArray = $(ButtonObj).parent().parent().children(".modal-body").children(".row").children(".col-3").children("input");
 
 
-    //Check Every <input> If It Has Incorrect Input
-
+    //Check Every <input> If Its Empty Or Has Incorrect Input
     var InputAreasComplete = true;
     for (var i = 0; i < ModalBodyCellArray.length; i++) {
         //Compare The input By name 
         switch ($(ModalBodyCellArray[i]).attr('name')) {
-            case 'Fname':
-                if (!ResultFname)
+            case 'Title':
+                if (!ResultTitle)
                     InputAreasComplete = false;
                 break;
-            case 'Lname':
-                if (!ResultLname)
+            case 'Stream':
+                if (!ResultStream)
                     InputAreasComplete = false;
                 break;
-            case 'Subject':
-                if (!ResultSubject)
+            case 'Type':
+                if (!ResultType)
+                    InputAreasComplete = false;
+                break;
+            case 'StartD':
+                if (!ResultStartD)
+                    InputAreasComplete = false;
+                break;
+            case 'EndD':
+                if (!ResultEndD)
                     InputAreasComplete = false;
                 break;
             default:
                 { }
         }
     }
+    console.log(InputAreasComplete);
     //Check If Every Input Has Correct Val In It
     if (InputAreasComplete) {
-        AddCourseToDataBase(ModalBodyCellArray);//Edit Course Attributes       
-        RefreshCourseHtml();//Refresh Course Table With The New Data
+        AddCourseToDataBase(ModalBodyCellArray);
         ResetModals();
     }
 }
@@ -154,20 +178,27 @@ function AddCourseToDataBase(NewCourseData) {
     for (var i = 0; i < NewCourseData.length; i++) {
         //Compare The input By name 
         switch ($(NewCourseData[i]).attr('name')) {
-            case 'Fname':
-                NewCourse.Fname = $(NewCourseData[i]).val();
+            case 'Title':
+                NewCourse.Title = $(NewCourseData[i]).val();
                 break;
-            case 'Lname':
-                NewCourse.Lname = $(NewCourseData[i]).val();
+            case 'Stream':
+                NewCourse.Stream = $(NewCourseData[i]).val();
                 break;
-            case 'Subject':
-                NewCourse.Subject = $(NewCourseData[i]).val();
+            case 'Type':
+                NewCourse.Type = $(NewCourseData[i]).val();
+                break;
+            case 'StartD':
+                NewCourse.StartD = new Date($(NewCourseData[i]).val());
+                break;
+            case 'EndD':
+                NewCourse.EndD = new Date($(NewCourseData[i]).val());
                 break;
             default:
                 { }
         }
     }
-
     //Add To DB
     CoursesArray.push(NewCourse);
 }
+
+

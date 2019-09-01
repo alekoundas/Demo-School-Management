@@ -55,11 +55,11 @@ function StudentTableMinimal(CourseId) {
                     if (StudentsArray[j].id == CoursesStudentsArray[i].StudentId) {
                         trow = $.parseHTML("<tr></tr>");
                         $("#course_student_tbody").append(trow);
-                        $(trow).append($.parseHTML("<td>" + j + "</td>"));
-                        $(trow).append($.parseHTML("<td>" + StudentsArray[j].Fname + "</td>"));
-                        $(trow).append($.parseHTML("<td>" + StudentsArray[j].Lname + "</td>"));
-                        $(trow).append($.parseHTML("<td>" + StudentsArray[j].Tuition + "</td>"));
-                        $(trow).append($.parseHTML("<td>" + DateBuilder(StudentsArray[j].Birth) + "</td>"));
+                        $(trow).append($.parseHTML("<td>" + i + "</td>"));
+                        $(trow).append($.parseHTML("<td>" + StudentsArray[i].Fname + "</td>"));
+                        $(trow).append($.parseHTML("<td>" + StudentsArray[i].Lname + "</td>"));
+                        $(trow).append($.parseHTML("<td>" + StudentsArray[i].Tuition + "</td>"));
+                        $(trow).append($.parseHTML("<td>" + DateBuilder(StudentsArray[i].Birth) + "</td>"));
                     }
 
                 }

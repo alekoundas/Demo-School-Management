@@ -1,11 +1,11 @@
 ﻿
 .body_class {
     background-color: rgba(76, 73, 73, 0.75);
-    height:9999px;
+    height: 9999px;
 }
 
 .container {
-   background-color: rgba(228, 233, 255, 0.73);
+    background-color: rgba(228, 233, 255, 0.73);
 }
 
 
@@ -15,7 +15,6 @@ img {
 }
 
 #MainTable {
-    
     border-radius: 25px;
     padding: 0px;
     /*background-color: rgba(228, 233, 255, 0.73);*/
@@ -28,5 +27,21 @@ img {
         top: 5px;
         margin: 0px auto;
         position: relative;
+        height: 100px;
         /*background-color: rgba(212, 219, 248, 0.73);*/
     }
+
+#StudentMinimalTable, #TrainerMinimalTable {
+    position: relative;
+    border-radius: 25px;
+    top: 100px;
+}
+
+
+table {
+    width: 95%;
+    top: 5px;
+    margin: 0px auto;
+    position: relative;
+    height: 100px;
+}
