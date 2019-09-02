@@ -1,4 +1,4 @@
-﻿function GetDeleteModalStudent() {
+﻿function GetDeleteModalAssignment() {
 
     var BaseModal = $.parseHTML("<div class='modal fade' id='deleteElementModal' tabindex='-1' role='dialog' aria-labelledby='exampleModalCenterTitle' aria-hidden='false'></div>");
     var ModalDialog = $.parseHTML("<div class='modal-dialog modal-dialog-centered modal-lg' role='document'></div>");
@@ -15,7 +15,7 @@
     //Modal Footer Build Here
     var ModalFooter = $.parseHTML("<div class='modal-footer'></div>");
     var ModalFooterCancelbt = $.parseHTML("<button type='button' class='btn btn-success mr-auto' data-dismiss='modal'>Cancel</button>");
-    var ModalFooterUpdatebt = $.parseHTML("<button type='button' class='btn btn-danger ' id = 'DeleteStudentModalButton' onclick='RefreshStudentHtml();'>I Understand</button>");
+    var ModalFooterUpdatebt = $.parseHTML("<button type='button' class='btn btn-danger ' id = 'DeleteAssignmentModalButton' onclick='RefreshAssignmentHtml();'>I Understand</button>");
 
 
 
@@ -43,20 +43,20 @@
 
 
 
-function DeleteRowStudent(StudentId) {
-    $("#DeleteStudentModal").modal("show");//show modal 
-    $('#DeleteStudentModalButton').click(function (e) {
-        DeleteStudentFromDataBase(StudentId);
+function DeleteRowAssignment(AssignmentId) {
+    $("#DeleteAssignmentModal").modal("show");//show modal 
+    $('#DeleteAssignmentModalButton').click(function (e) {
+        DeleteAssignmentFromDataBase(AssignmentId);
     });  
 }
 
 
 
-function DeleteStudentFromDataBase(StudentId) {
+function DeleteAssignmentFromDataBase(AssignmentId) {
 
-    for (var i = 0; i < StudentsArray.length; i++) {
-        if (StudentsArray[i].id == StudentId) {
-            StudentsArray.splice(i, 1);
+    for (var i = 0; i < AssignmentsArray.length; i++) {
+        if (AssignmentsArray[i].id == AssignmentId) {
+            AssignmentsArray.splice(i, 1);
         }
     }
     ResetModals();

@@ -120,11 +120,6 @@ function SubmitEditButtonCourse(ButtonObj) {
     var Type = $('#EditModalBodyInputType').val();
     var StartD = $('#EditModalBodyInputStartD').val();
     var EndD = $('#EditModalBodyInputEndD').val();
-    console.log(Title);
-    console.log(Stream);
-    console.log(Type);
-    console.log(StartD);
-    console.log(EndD);
 
     //Initiate Regular Expretions
     var StringExp = new RegExp("^[A-Za-z]{3,15}$", '');
@@ -140,10 +135,10 @@ function SubmitEditButtonCourse(ButtonObj) {
 
 
     //Turn To red-green The Input Border Color Of The Wrong-Correct RegEx Inputs
-    (ResultTitle) ? $('  #EditModalBodyInputTitle  ').removeClass("is-invalid").addClass("is-valid") : $('#EditModalBodyInputTitle  ').removeClass("is-valid").addClass("is-invalid");
-    (ResultStream) ? $('  #EditModalBodyInputStream  ').removeClass("is-invalid").addClass("is-valid") : $('#EditModalBodyInputStream  ').removeClass("is-valid").addClass("is-invalid");
-    (ResultType) ? $('#EditModalBodyInputType').removeClass("is-invalid").addClass("is-valid") : $('#EditModalBodyInputType').removeClass("is-valid").addClass("is-invalid");
-    (ResultStartD) ? $('  #EditModalBodyInputStartD  ').removeClass("is-invalid").addClass("is-valid") : $('#EditModalBodyInputStartD  ').removeClass("is-valid").addClass("is-invalid");
+    (ResultTitle) ? $(' #EditModalBodyInputTitle ').removeClass("is-invalid").addClass("is-valid") : $('#EditModalBodyInputTitle ').removeClass("is-valid").addClass("is-invalid");
+    (ResultStream) ? $('#EditModalBodyInputStream').removeClass("is-invalid").addClass("is-valid") : $('#EditModalBodyInputStream').removeClass("is-valid").addClass("is-invalid");
+    (ResultType) ? $('  #EditModalBodyInputType  ').removeClass("is-invalid").addClass("is-valid") : $('#EditModalBodyInputType  ').removeClass("is-valid").addClass("is-invalid");
+    (ResultStartD) ? $('#EditModalBodyInputStartD').removeClass("is-invalid").addClass("is-valid") : $('#EditModalBodyInputStartD').removeClass("is-valid").addClass("is-invalid");
     (ResultEndD) ? $('  #EditModalBodyInputEndD  ').removeClass("is-invalid").addClass("is-valid") : $('#EditModalBodyInputEndD  ').removeClass("is-valid").addClass("is-invalid");
 
 

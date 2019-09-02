@@ -152,7 +152,7 @@ function SubmitAddStudent(ButtonObj) {
 
 
 function AddStudentToDataBase(NewStudentData) {
-    //Find The Max Id +1 For The Next Insert To Database
+    //Find The Max Id For The Next Insert To Database
     var Max_Id = -1;
     for (var i = 0; i < StudentsArray.length; i++) {
         if (StudentsArray[i].id > Max_Id) {

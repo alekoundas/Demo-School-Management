@@ -34,11 +34,16 @@ function GetTrainerTableMinimal(Id) {
 
 function DummyTrainers(TrainersArray) {
 
-    TrainersArray.push({ id: 1, Fname: "Τασος", Lname: "Παναγοπουλος", Subject: 1500 });
-    TrainersArray.push({ id: 2, Fname: "Γιαννης", Lname: "Καλυβας", Subject: 1500});
-    TrainersArray.push({ id: 3, Fname: "Αλεξανδρος", Lname: "Ψυχογυιος", Subject: 1500 });
-    TrainersArray.push({ id: 4, Fname: "Τασος", Lname: "Γκικα", Subject: 1500 });
-    TrainersArray.push({ id: 5, Fname: "Γιαννης", Lname: "Κουνασους", Subject: 1500});
-    TrainersArray.push({ id: 6, Fname: "Κωστας", Lname: "Φερδεριγος", Subject: 1500});
+    TrainersArray.push({ id: 1, Fname: "Margaret", Lname: "Fletcher", Subject: "C#    "});
+    TrainersArray.push({ id: 2, Fname: "Emma    ", Lname: "Smith   ", Subject: "C#    "});
+    TrainersArray.push({ id: 3, Fname: "Linda   ", Lname: "O'Brien ", Subject: "JAVA  "});
+    TrainersArray.push({ id: 4, Fname: "William ", Lname: "Miller  ", Subject: "SQL   "});
+    TrainersArray.push({ id: 5, Fname: "Damian  ", Lname: "White   ", Subject: "C#    "});
+    TrainersArray.push({ id: 6, Fname: "Sophie  ", Lname: "Anderson", Subject: "Python"});
+    TrainersArray.push({ id: 7, Fname: "Joseph  ", Lname: "Evans   ", Subject: "SQL   "});
+    TrainersArray.push({ id: 8, Fname: "David   ", Lname: "Wang    ", Subject: "JAVA  "});
+    TrainersArray.push({ id: 9, Fname: "Patricia", Lname: "Gagnon  ", Subject: "JAVA  "});
+    TrainersArray.push({ id: 10, Fname: "George  ", Lname: "Wilson ", Subject: "C#    "});
+    TrainersArray.push({ id: 11, Fname: "Samantha", Lname: "Brown  ", Subject: "Python"});
 
 }

@@ -47,7 +47,7 @@ function DeleteRowTrainer(TrainerId) {
     $("#DeleteTrainerModal").modal("show");//show modal 
     $('#DeleteTrainerModalButton').click(function (e) {
         DeleteTrainerFromDataBase(TrainerId);
-        ResetModals();
+            ResetModals();
     });  
 }
 

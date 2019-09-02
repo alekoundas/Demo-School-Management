@@ -6,14 +6,14 @@
     <title>Private School</title>
     <script src="Scripts/jquery-3.4.1.js"></script>
     <script src="JavaScript/main.js"></script>
-    
+
     <!--Student-->
     <script src="JavaScript/Student/Student.js"></script>
     <script src="JavaScript/Student/StudentTable.js"></script>
     <script src="JavaScript/Student/EditStudentModal.js"></script>
     <script src="JavaScript/Student/AddStudentModal.js"></script>
     <script src="JavaScript/Student/DeleteStudentModal.js"></script>
-    
+
     <!--Tainer-->
     <script src="JavaScript/Trainer/Trainer.js"></script>
     <script src="JavaScript/Trainer/TrainerTable.js"></script>
@@ -29,6 +29,13 @@
     <script src="JavaScript/Course/EditCourseModal.js"></script>
     <script src="JavaScript/Course/IncludeToCourseModal.js"></script>
 
+    <!--Assignment-->
+    <script src="JavaScript/Assignment/Assignment.js"></script>
+    <script src="JavaScript/Assignment/AssignmentTable.js"></script>
+    <script src="JavaScript/Assignment/AddAssignmentModal.js"></script>
+    <script src="JavaScript/Assignment/EditAssignmentModal.js"></script>
+    <script src="JavaScript/Assignment/DeleteAssignmentModal.js"></script>
+
     <link href="CSS/ResetCss.css" rel="stylesheet" />
     <link href="CSS/StyleSheet.css" rel="stylesheet" />
 
@@ -40,8 +47,7 @@
 
 
 </head>
-<body>
-    <div class="body_class">
+<body class="container-fluid"> 
         <div class="MainNav">
             <nav class="navbar sticky-top navbar-dark bg-dark">
                 <a class="navbar-brand" href="#">
@@ -53,26 +59,12 @@
                 <a class="navbar-brand" onclick="GetPage('Assignment');" href="#">Assignments</a>
             </nav>
         </div>
-        <div class="TableContainer">
+        <div class="TableContainer" id="course_table_container">
             <div class="row">
                 <div class="col-2"></div>
                 <div class="col-8 container" id="MainTable"></div>
                 <div class="col-2"></div>
-            </div>
-            <div class="row">
-                <div class="col-2"></div>
-                <div class="col-3 container" id="StudentMinimalTable"></div>
-                <div class="col-2 "></div>
-                <div class="col-3 container" id="TrainerMinimalTable"></div>
-                <div class="col-2"></div>
-            </div>
+            </div>         
         </div>
-    </div>
-
-
-
-
-
-
 </body>
 </html>

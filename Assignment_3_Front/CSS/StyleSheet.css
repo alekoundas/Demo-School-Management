@@ -1,7 +1,9 @@
 ﻿
-.body_class {
+html body {
     background-color: rgba(76, 73, 73, 0.75);
     height: 9999px;
+    /*Without overflow When The Modal Resets, Page Scroll Is Disabled*/
+    overflow: visible !important;
 }
 
 .container {
@@ -17,7 +19,7 @@ img {
 #MainTable {
     border-radius: 25px;
     padding: 0px;
-    /*background-color: rgba(228, 233, 255, 0.73);*/
+    
     position: relative;
     top: 50px;
 }
@@ -28,20 +30,29 @@ img {
         margin: 0px auto;
         position: relative;
         height: 100px;
-        /*background-color: rgba(212, 219, 248, 0.73);*/
+       
     }
 
-#StudentMinimalTable, #TrainerMinimalTable {
+
+#secondary_tables  div {
+    margin-bottom: 70px;
+}
+
+#StudentMinimalTable, #TrainerMinimalTable, #AssignmentMinimalTable {
     position: relative;
     border-radius: 25px;
     top: 100px;
 }
-
+#secondary_tables {
+    position: relative;
+    
+    justify-content:space-around;
+}
 
 table {
     width: 95%;
     top: 5px;
     margin: 0px auto;
     position: relative;
-    height: 100px;
+    
 }

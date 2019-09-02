@@ -6,6 +6,8 @@ var AssignmentsArray = [];
 var CoursesArray = [];
 var CoursesStudentsArray = [];
 var CoursesTrainersArray = [];
+var CoursesAssignmentsArray = [];
+
 
 
 
@@ -14,20 +16,23 @@ var CoursesTrainersArray = [];
 function GetPage(UserChoice) {
     switch (UserChoice) {
         case 'Student':
-            
+            $('#secondary_tables').remove();
             ResetModals();
-
             RefreshStudentHtml();         
             break;
         case 'Trainer':
+            $('#secondary_tables').remove();
             ResetModals();
-
             RefreshTrainerHtml();
             break;
         case 'Course':
             ResetModals();
             RefreshCourseHtml();
             break;
+        case 'Assignment':
+            $('#secondary_tables').remove();
+            ResetModals();
+            RefreshAssignmentHtml();
         default:
     }
 
@@ -114,6 +119,46 @@ function RefreshTrainerHtmlCourseModalBody(Id) {
 }
 
 
+//AJAX Assignment
+function RefreshAssignmentHtml() {
+
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+            document.getElementById("MainTable").innerHTML = xhttp.responseText;
+            GetAssignmentTable();
+        }
+    };
+    xhttp.open("GET", "/JavaScript/Assignment/AssignmentTable.html", true);
+    xhttp.send();
+}
+function RefreshAssignmentHtmlMinimal(Id) {
+
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+            document.getElementById("AssignmentMinimalTable").innerHTML = xhttp.responseText;
+            GetAssignmentTableMinimal(Id);
+        }
+    };
+    xhttp.open("GET", "/JavaScript/Assignment/AssignmentTableMinimal.html", true);
+    xhttp.send();
+}
+function RefreshAssignmentHtmlCourseModalBody(Id) {
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+            document.getElementById("CourseModalIncludeTable").innerHTML = xhttp.responseText;
+            AssignmentTableCourseModal(Id);
+        }
+    };
+    xhttp.open("GET", "/JavaScript/Assignment/AssignmentTableModalBody.html", true);
+    xhttp.send();
+}
+
+
+
+
 //AJAX Course
 function RefreshCourseHtml() {
 
@@ -129,11 +174,13 @@ function RefreshCourseHtml() {
 }
 
 function ResetModals() {
-    $('#AddElementModal').remove(); 
+    $('#AddElementModal').css("display","none"); 
     $('#DeleteElementModal').remove();
     $('#EditElementModal').remove();
-    //$('#TrainerMinimalTable').remove();
-    //$('#StudentMinimalTable').remove();
+    $('#IncludeElementModal').remove();
+    
+
+
     $('.modal-backdrop').remove();//Remove div Create Automaticaly When Modal Opens(It Should Close By It Self)
 
 }
@@ -141,4 +188,3 @@ function ResetModals() {
 function DateBuilder(Date) {
     return [Date.getDate(), Date.getMonth(), Date.getFullYear()].join("/");
 }
-

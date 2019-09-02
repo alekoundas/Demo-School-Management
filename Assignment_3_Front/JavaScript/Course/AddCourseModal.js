@@ -156,7 +156,6 @@ function SubmitAddCourse(ButtonObj) {
                 { }
         }
     }
-    console.log(InputAreasComplete);
     //Check If Every Input Has Correct Val In It
     if (InputAreasComplete) {
         AddCourseToDataBase(ModalBodyCellArray);

@@ -13,11 +13,12 @@
 
 
     //Table Body Courses
+    var Counter = 1;
     for (var i = 0; i < CourseArray.length; i++) {
 
         trow = $.parseHTML("<tr onclick='GetCoursePerElement("+CourseArray[i].id+")'></tr>");
         $("#course_tbody").append(trow);
-        $(trow).append($.parseHTML("<td>" + i + "</td>"));
+        $(trow).append($.parseHTML("<td>" + Counter++ + "</td>"));
         $(trow).append($.parseHTML("<td>" + CourseArray[i].Title + "</td>"));
         $(trow).append($.parseHTML("<td>" + CourseArray[i].Stream + "</td>"));
         $(trow).append($.parseHTML("<td>" + CourseArray[i].Type + "</td>"));
@@ -32,6 +33,29 @@
         ));
 
     }
+}
+
+function SecondaryTables() {
+    var Row = $.parseHTML("   <div class='row' id='secondary_tables'></div>");  
+    var ColSm1 = $.parseHTML("<div class='col-1'></div>");
+    var ColStudentMinimalTable = $.parseHTML("   <div class='col-7 col-lg-5  col-xl-3 container' id='StudentMinimalTable'></div>");
+    var ColTrainerMinimalTable = $.parseHTML("   <div class='col-7 col-lg-5  col-xl-3 container' id='TrainerMinimalTable'></div>");
+    var ColAssignmentMinimalTable = $.parseHTML("<div class='col-7 col-lg-6  col-xl-3 container' id='AssignmentMinimalTable'></div>");
+  
+
+    //Append Everything Together I a Row
+
+   
+    $(Row).append(ColStudentMinimalTable);
+
+    $(Row).append(ColTrainerMinimalTable);
+
+    $(Row).append(ColAssignmentMinimalTable);
+    
+
+    
+
+    return Row;
 }
 
 

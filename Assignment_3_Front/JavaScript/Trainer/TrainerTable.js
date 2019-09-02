@@ -11,11 +11,12 @@
 
 
     //Table Body Trainers
+    var Counter = 1;
     for (var i = 0; i < TrainerArray.length; i++) {
 
         trow = $.parseHTML("<tr></tr>");
         $("#trainer_tbody").append(trow);
-        $(trow).append($.parseHTML("<td>" + i + "</td>"));
+        $(trow).append($.parseHTML("<td>" + Counter++ + "</td>"));
         $(trow).append($.parseHTML("<td>" + TrainerArray[i].Fname + "</td>"));
         $(trow).append($.parseHTML("<td>" + TrainerArray[i].Lname + "</td>"));
         $(trow).append($.parseHTML("<td>" + TrainerArray[i].Subject + "</td>"));
@@ -36,7 +37,7 @@ function TrainerTableMinimal(CourseId) {
     $(trow).append($.parseHTML("<th> Last Name </th>"));
     $(trow).append($.parseHTML("<th> Subject </th>"));
 
-
+    var Counter = 1;
     if (CourseId) {
         //Table Body Trainers
         for (var i = 0; i < CoursesTrainersArray.length; i++) {
@@ -46,7 +47,7 @@ function TrainerTableMinimal(CourseId) {
                     if (TrainersArray[j].id == CoursesTrainersArray[i].TrainerId) {
                         trow = $.parseHTML("<tr></tr>");
                         $("#course_trainer_tbody").append(trow);
-                        $(trow).append($.parseHTML("<td>" + j + "</td>"));
+                        $(trow).append($.parseHTML("<td>" + Counter++ + "</td>"));
                         $(trow).append($.parseHTML("<td>" + TrainersArray[j].Fname + "</td>"));
                         $(trow).append($.parseHTML("<td>" + TrainersArray[j].Lname + "</td>"));
                         $(trow).append($.parseHTML("<td>" + TrainersArray[j].Subject + "</td>"));
@@ -63,7 +64,7 @@ function TrainerTableMinimal(CourseId) {
         for (var i = 0; i < TrainersArray.length; i++) {
             trow = $.parseHTML("<tr></tr>");
             $("#course_trainer_tbody").append(trow);
-            $(trow).append($.parseHTML("<td>" + i + "</td>"));
+            $(trow).append($.parseHTML("<td>" + Counter++ + "</td>"));
             $(trow).append($.parseHTML("<td>" + TrainersArray[i].Fname + "</td>"));
             $(trow).append($.parseHTML("<td>" + TrainersArray[i].Lname + "</td>"));
             $(trow).append($.parseHTML("<td>" + TrainersArray[i].Subject + "</td>"));
@@ -89,6 +90,7 @@ function TrainerTableCourseModal(CourseId) {
     //Print Every Table Row With Checked or Not In The Checkbox
     //Every CheckBox Will Keep The TrainerID @ .val()
     var CourseHitSuccess;
+    var Counter = 1;
     for (var j = 0; j < TrainersArray.length; j++) {
         CourseHitSuccess = false;
 
@@ -99,7 +101,7 @@ function TrainerTableCourseModal(CourseId) {
                 if (TrainersArray[j].id == CoursesTrainersArray[i].TrainerId) {
                     trow = $.parseHTML("<tr></tr>");
                     $("#modal_trainer_tbody").append(trow);
-                    $(trow).append($.parseHTML("<td>" + j + "</td>"));
+                    $(trow).append($.parseHTML("<td>" + Counter++ + "</td>"));
                     $(trow).append($.parseHTML("<td>" + TrainersArray[j].Fname + "</td>"));
                     $(trow).append($.parseHTML("<td>" + TrainersArray[j].Lname + "</td>"));
                     $(trow).append($.parseHTML("<td>" + TrainersArray[j].Subject + "</td>"));
@@ -112,7 +114,7 @@ function TrainerTableCourseModal(CourseId) {
         if (CourseHitSuccess == false) {
             trow = $.parseHTML("<tr></tr>");
             $("#modal_trainer_tbody").append(trow);
-            $(trow).append($.parseHTML("<td>" + j + "</td>"));
+            $(trow).append($.parseHTML("<td>" + Counter++ + "</td>"));
             $(trow).append($.parseHTML("<td>" + TrainersArray[j].Fname + "</td>"));
             $(trow).append($.parseHTML("<td>" + TrainersArray[j].Lname + "</td>"));
             $(trow).append($.parseHTML("<td>" + TrainersArray[j].Subject + "</td>"));

@@ -2,7 +2,7 @@
 
     //Fill Array If Empty
     if (CoursesArray.length == 0)
-        DummyCourses(CoursesArray);
+        DummyCourses();
 
     //Add To Body Empty Divs For Add-Edit Course Modal
     //Only If The Divs Doesnt Exist Yet
@@ -22,22 +22,26 @@
         $("body").append('<div id="IncludeElementModal">');
         $("#IncludeElementModal").append(GetIncludeModalCourse()); //Append Completed modal to empty div
     }
+    if (document.getElementById("secondary_tables") == null) {
+        $("#course_table_container").append(SecondaryTables());//Append Completed Tables to empty div
+    }
     CourseTable(CoursesArray);
 }
 
 function GetCoursePerElement(CourseId) {
     RefreshTrainerHtmlMinimal(CourseId);
     RefreshStudentHtmlMinimal(CourseId);
+    RefreshAssignmentHtmlMinimal(CourseId);
     
 }
 
 
-function DummyCourses(CoursesArray) {
+function DummyCourses() {
 
-    CoursesArray.push({ id: 1, Title: " CB8 - Full - C# ", Stream: "Full-Time", Type: ' C# ', StartD: new Date(1995, 1, 1), EndD: new Date(1995, 1, 1) });
-    CoursesArray.push({ id: 2, Title: " CB8 - Part - C# ", Stream: "Part-Time", Type: ' C# ', StartD: new Date(1995, 1, 1), EndD: new Date(1995, 1, 1) });
-    CoursesArray.push({ id: 3, Title: "CB8 - Full - JAVA", Stream: "Full-Time", Type: 'JAVA', StartD: new Date(1995, 1, 1), EndD: new Date(1995, 1, 1) });
-    CoursesArray.push({ id: 4, Title: "CB8 - Part - JAVA", Stream: "Part-Time", Type: 'JAVA', StartD: new Date(1995, 1, 1), EndD: new Date(1995, 1, 1) });
+    CoursesArray.push({ id: 1, Title: " CB8 - Full - C# ", Stream: "Full-Time", Type: ' C# ', StartD: new Date(2019, 1, 1), EndD: new Date(2019, 3, 30) });
+    CoursesArray.push({ id: 2, Title: " CB8 - Part - C# ", Stream: "Part-Time", Type: ' C# ', StartD: new Date(2019, 1, 1), EndD: new Date(2019, 6, 30) });
+    CoursesArray.push({ id: 3, Title: "CB8 - Full - JAVA", Stream: "Full-Time", Type: 'JAVA', StartD: new Date(2019, 1, 1), EndD: new Date(2019, 3, 30) });
+    CoursesArray.push({ id: 4, Title: "CB8 - Part - JAVA", Stream: "Part-Time", Type: 'JAVA', StartD: new Date(2019, 1, 1), EndD: new Date(2019, 6, 30) });
 
 
     CoursesTrainersArray.push({ id: 0, CourseId: 1, TrainerId: 3 });
@@ -58,6 +62,15 @@ function DummyCourses(CoursesArray) {
     CoursesStudentsArray.push({ id: 5, CourseId: 2, StudentId: 1 });
     CoursesStudentsArray.push({ id: 6, CourseId: 4, StudentId: 3 });
     CoursesStudentsArray.push({ id: 7, CourseId: 4, StudentId: 2 });
+
+    CoursesAssignmentsArray.push({ id: 0, CourseId: 1, AssignmentId: 3 });
+    CoursesAssignmentsArray.push({ id: 1, CourseId: 2, AssignmentId: 2 });
+    CoursesAssignmentsArray.push({ id: 2, CourseId: 3, AssignmentId: 4 });
+    CoursesAssignmentsArray.push({ id: 3, CourseId: 1, AssignmentId: 1 });
+    CoursesAssignmentsArray.push({ id: 4, CourseId: 1, AssignmentId: 4 });
+    CoursesAssignmentsArray.push({ id: 5, CourseId: 2, AssignmentId: 1 });
+    CoursesAssignmentsArray.push({ id: 6, CourseId: 4, AssignmentId: 3 });
+    CoursesAssignmentsArray.push({ id: 7, CourseId: 4, AssignmentId: 2 });
 
 
 }

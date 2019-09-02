@@ -14,11 +14,12 @@
 
 
     //Table Body Students
+    var Counter = 1;
     for (var i = 0; i < StudentArray.length; i++) {
 
         trow = $.parseHTML("<tr></tr>");
         $("#student_tbody").append(trow);
-        $(trow).append($.parseHTML("<td>" + i + "</td>"));
+        $(trow).append($.parseHTML("<td>" + Counter++ + "</td>"));
         $(trow).append($.parseHTML("<td>" + StudentArray[i].Fname + "</td>"));
         $(trow).append($.parseHTML("<td>" + StudentArray[i].Lname + "</td>"));
         $(trow).append($.parseHTML("<td>" + StudentArray[i].Tuition + "</td>"));
@@ -46,6 +47,7 @@ function StudentTableMinimal(CourseId) {
     $(trow).append($.parseHTML("<th> Tuition </th>"));
     $(trow).append($.parseHTML("<th> Date Of Birth </th>"));
 
+    var Counter = 1;
     if (CourseId) {
         //Table Body Students
         for (var i = 0; i < CoursesStudentsArray.length; i++) {
@@ -55,7 +57,7 @@ function StudentTableMinimal(CourseId) {
                     if (StudentsArray[j].id == CoursesStudentsArray[i].StudentId) {
                         trow = $.parseHTML("<tr></tr>");
                         $("#course_student_tbody").append(trow);
-                        $(trow).append($.parseHTML("<td>" + j + "</td>"));
+                        $(trow).append($.parseHTML("<td>" + Counter++ + "</td>"));
                         $(trow).append($.parseHTML("<td>" + StudentsArray[j].Fname + "</td>"));
                         $(trow).append($.parseHTML("<td>" + StudentsArray[j].Lname + "</td>"));
                         $(trow).append($.parseHTML("<td>" + StudentsArray[j].Tuition + "</td>"));
@@ -74,7 +76,7 @@ function StudentTableMinimal(CourseId) {
 
             trow = $.parseHTML("<tr></tr>");
             $("#course_student_tbody").append(trow);
-            $(trow).append($.parseHTML("<td>" + i + "</td>"));
+            $(trow).append($.parseHTML("<td>" + Counter++ + "</td>"));
             $(trow).append($.parseHTML("<td>" + StudentsArray[i].Fname + "</td>"));
             $(trow).append($.parseHTML("<td>" + StudentsArray[i].Lname + "</td>"));
             $(trow).append($.parseHTML("<td>" + StudentsArray[i].Tuition + "</td>"));
@@ -87,7 +89,6 @@ function StudentTableMinimal(CourseId) {
 function StudentTableCourseModal(CourseId) {
     //Table Header Students
     var trow = $.parseHTML("<tr></tr>");
-    $("#modal_student_thead").append(trow);
     $(trow).append($.parseHTML("<th> No. </th>"));
     $(trow).append($.parseHTML("<th> First Name </th>"));
     $(trow).append($.parseHTML("<th> Last Name </th>"));
@@ -101,6 +102,7 @@ function StudentTableCourseModal(CourseId) {
     //Print Every Table Row With Checked or Not In The Checkbox
     //Every CheckBox Will Keep The StudentID @ .val()
     var CourseHitSuccess;
+    var Counter = 1;
     for (var j = 0; j < StudentsArray.length; j++) {
         CourseHitSuccess = false;
 
@@ -111,7 +113,7 @@ function StudentTableCourseModal(CourseId) {
                 if (StudentsArray[j].id == CoursesStudentsArray[i].StudentId) {
                     trow = $.parseHTML("<tr></tr>");
                     $("#modal_student_tbody").append(trow);
-                    $(trow).append($.parseHTML("<td>" + j + "</td>"));
+                    $(trow).append($.parseHTML("<td>" + Counter++ + "</td>"));
                     $(trow).append($.parseHTML("<td>" + StudentsArray[j].Fname + "</td>"));
                     $(trow).append($.parseHTML("<td>" + StudentsArray[j].Lname + "</td>"));
                     $(trow).append($.parseHTML("<td>" + StudentsArray[j].Tuition + "</td>"));
@@ -125,7 +127,7 @@ function StudentTableCourseModal(CourseId) {
         if (CourseHitSuccess == false) {
             trow = $.parseHTML("<tr></tr>");
             $("#modal_student_tbody").append(trow);
-            $(trow).append($.parseHTML("<td>" + j + "</td>"));
+            $(trow).append($.parseHTML("<td>" + Counter++ + "</td>"));
             $(trow).append($.parseHTML("<td>" + StudentsArray[j].Fname + "</td>"));
             $(trow).append($.parseHTML("<td>" + StudentsArray[j].Lname + "</td>"));
             $(trow).append($.parseHTML("<td>" + StudentsArray[j].Tuition + "</td>"));
@@ -133,5 +135,8 @@ function StudentTableCourseModal(CourseId) {
             $(trow).append($.parseHTML("<td><input type='checkbox' class='form-check-input' name='checkerbox' value='" + StudentsArray[j].id +"' ></td>"));
         }
     }
+
+
+    $("#modal_student_thead").append(trow);
 }
 

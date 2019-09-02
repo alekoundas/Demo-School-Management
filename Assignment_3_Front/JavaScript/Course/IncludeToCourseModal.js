@@ -17,8 +17,9 @@
 
     //Radio Buttons
     var ModalBodyClassRadio = $.parseHTML("<div class='radio'></div>");
-    var ModalBodyRadioInputStudent = $.parseHTML(" <label class='radio-inline' for='StudentRadio' onclick='ShowCourseTableInModal(this)'> <input type='radio'  id='StudentRadio' name='RadioBt'> Students </label>");
-    var ModalBodyRadioInputTrainer = $.parseHTML(" <label class='radio-inline' for='TrainerRadio' onclick='ShowCourseTableInModal(this)'> <input type='radio'  id='TrainerRadio' name='RadioBt'> Trainers </label>");
+    var ModalBodyRadioInputStudent = $.parseHTML("   <label class='radio-inline' for='StudentRadio'    onclick='ShowCourseTableInModal(this)'> <input type='radio'  id='StudentRadio'    name='RadioBt'>  Students   </label>");
+    var ModalBodyRadioInputTrainer = $.parseHTML("   <label class='radio-inline' for='TrainerRadio'    onclick='ShowCourseTableInModal(this)'> <input type='radio'  id='TrainerRadio'    name='RadioBt'>  Trainers   </label>");
+    var ModalBodyRadioInputAssignment = $.parseHTML("<label class='radio-inline' for='AssignmentRadio' onclick='ShowCourseTableInModal(this)'> <input type='radio'  id='AssignmentRadio' name='RadioBt'> Assignments </label>");
 
     //Student-Traner Table
     var ModalBodyTableElement = $.parseHTML("<div id='CourseModalIncludeTable'></div>");//Will Display Student Or Trainer Table Based On Radio Option
@@ -56,6 +57,7 @@
     $(ModalBodyRowGrid).append(ModalBodyClassRadio);
     $(ModalBodyClassRadio).append(ModalBodyRadioInputStudent);
     $(ModalBodyClassRadio).append(ModalBodyRadioInputTrainer);
+    $(ModalBodyClassRadio).append(ModalBodyRadioInputAssignment);
     $(ModalBodyRowGrid).clone().appendTo(ModalBody);
     $(ModalBodyClassRadio).remove();//Remove the input because clone() will cary any next inputs with it
 
@@ -83,10 +85,12 @@ function IncludeRowCourse(Courseid) {
 function ShowCourseTableInModal(RadioObj) {
     if ($(RadioObj).text().trim() == "Students") {
         RefreshStudentHtmlCourseModalBody(CourseID);
-
     }
-    else {
+    if ($(RadioObj).text().trim() == "Trainers") {
         RefreshTrainerHtmlCourseModalBody(CourseID);
+    }
+    if ($(RadioObj).text().trim() == "Assignments") {
+        RefreshAssignmentHtmlCourseModalBody(CourseID);
     }
 }
 
@@ -99,23 +103,27 @@ function ShowCourseTableInModal(RadioObj) {
 function SubmitIncludeCourse(SubmitBt) {
     var UpdateStudentsCourse = [];
     var UpdateTrainersCourse = [];
+    var UpdateAssignmentsCourse = [];
     if ($('#StudentRadio').is(':checked')) {
         $('table [type="checkbox"]').each(function (i, chk) {
-            if (chk.checked) {
+            if (chk.checked) 
                 UpdateStudentsCourse.push($(chk).val());
-                
-            }
         });
         UpdateCourseData(UpdateStudentsCourse, "student");
     }
-    else {
+    if ($('#TrainerRadio').is(':checked')) {
         $('table [type="checkbox"]').each(function (i, chk) {
-            if (chk.checked) {
+            if (chk.checked) 
                 UpdateTrainersCourse.push($(chk).val());
-               
-            }
         });
         UpdateCourseData(UpdateTrainersCourse, "trainer");
+    }
+    if ($('#AssignmentRadio').is(':checked')) {
+        $('table [type="checkbox"]').each(function (i, chk) {
+            if (chk.checked) 
+                UpdateAssignmentsCourse.push($(chk).val());
+        });
+        UpdateCourseData(UpdateAssignmentsCourse, "assignment");
     }
 
 } 
@@ -132,11 +140,7 @@ function UpdateCourseData(UpdatedData, Type) {
         for (var i = 0; i < UpdatedData.length; i++) {
             var MaxId = Math.max.apply(Math, CoursesStudentsArray.map(function (Element) { return Element.id; }));
             CoursesStudentsArray.push({ id: MaxId + 1, CourseId: CourseID, StudentId: parseInt(UpdatedData[i]) })
-        }
-        console.log(CoursesStudentsArray);
-
-        
-
+        }      
     }  
     if (Type == "trainer") {
         //Remove From DataBase Elements With The CourseID Selected.So I can Add The New Elements From The Same CourseID
@@ -148,10 +152,21 @@ function UpdateCourseData(UpdatedData, Type) {
         for (var i = 0; i < UpdatedData.length; i++) {
             var MaxId = Math.max.apply(Math, CoursesTrainersArray.map(function (Element) { return Element.id; }));
             CoursesTrainersArray.push({ id: MaxId + 1, CourseId: CourseID, TrainerId: parseInt(UpdatedData[i]) })
-        }
-        console.log(CoursesTrainersArray);
-
-
-        
+        }       
     }
+    if (Type == "assignment") {
+        //Remove From DataBase Elements With The CourseID Selected.So I can Add The New Elements From The Same CourseID
+        var FilteredItems = CoursesAssignmentsArray.filter(function (Element) {
+            return Element.CourseId != CourseID;
+
+        });
+        CoursesAssignmentsArray = FilteredItems;
+        for (var i = 0; i < UpdatedData.length; i++) {
+            var MaxId = Math.max.apply(Math, CoursesAssignmentsArray.map(function (Element) { return Element.id; }));
+            CoursesAssignmentsArray.push({ id: MaxId + 1, CourseId: CourseID, AssignmentId: parseInt(UpdatedData[i]) })
+        }
+    }
+
+    GetCoursePerElement(CourseID);
+    ResetModals();
 }
