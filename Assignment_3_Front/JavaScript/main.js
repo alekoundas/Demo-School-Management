@@ -2,11 +2,19 @@
 var StudentsArray = [];
 var TrainersArray = [];
 var AssignmentsArray = [];
-
+var AssignmentsStudentsArray = [];
 var CoursesArray = [];
 var CoursesStudentsArray = [];
 var CoursesTrainersArray = [];
 var CoursesAssignmentsArray = [];
+
+
+$(document).ready(function () {
+    DummyStudents();
+    DummyTrainers();
+    DummyAssignments();
+    DummyCourses();
+});
 
 
 
@@ -26,6 +34,7 @@ function GetPage(UserChoice) {
             RefreshTrainerHtml();
             break;
         case 'Course':
+            $('#secondary_tables').remove();
             ResetModals();
             RefreshCourseHtml();
             break;
@@ -66,12 +75,12 @@ function RefreshStudentHtmlMinimal(Id) {
     xhttp.open("GET", "/JavaScript/Student/StudentTableMinimal.html", true);
     xhttp.send();
 }
-function RefreshStudentHtmlCourseModalBody(Id) {
+function RefreshStudentHtmlCourseModalBody(CourseId,AssignmetId) {
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
             document.getElementById("CourseModalIncludeTable").innerHTML = xhttp.responseText;
-            StudentTableCourseModal(Id);
+            StudentTableCourseModal(CourseId, AssignmetId);
         }
     };
     xhttp.open("GET", "/JavaScript/Student/StudentTableModalBody.html", true);
@@ -121,7 +130,7 @@ function RefreshTrainerHtmlCourseModalBody(Id) {
 
 //AJAX Assignment
 function RefreshAssignmentHtml() {
-
+    ResetModals();
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
@@ -172,15 +181,36 @@ function RefreshCourseHtml() {
     xhttp.open("GET", "/JavaScript/Course/CourseTable.html", true);
     xhttp.send();
 }
+function RefreshCourseHtmlMinimal(id) {
+
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+            document.getElementById("CourseMinimalTable").innerHTML = xhttp.responseText;
+            CourseTableMinimal(id);           
+        }
+    };
+    xhttp.open("GET", "/JavaScript/Course/CourseTableMinimal.html", true);
+    xhttp.send();
+}
+function RefreshCourseHtmlModalBody(id, GivenCourseArr) {
+    
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+            document.getElementById("CourseModalIncludeTableTop").innerHTML = xhttp.responseText;
+            CourseTableAssignmentModal(id, GivenCourseArr);
+        }
+    };
+    xhttp.open("GET", "/JavaScript/Course/CourseTableModalBody.html", true);
+    xhttp.send();
+}
 
 function ResetModals() {
-    $('#AddElementModal').css("display","none"); 
+    $('#AddElementModal').remove();
     $('#DeleteElementModal').remove();
     $('#EditElementModal').remove();
     $('#IncludeElementModal').remove();
-    
-
-
     $('.modal-backdrop').remove();//Remove div Create Automaticaly When Modal Opens(It Should Close By It Self)
 
 }

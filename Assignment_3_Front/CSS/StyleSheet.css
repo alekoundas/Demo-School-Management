@@ -34,20 +34,22 @@ img {
     }
 
 
-#secondary_tables  div {
-    margin-bottom: 70px;
-}
 
-#StudentMinimalTable, #TrainerMinimalTable, #AssignmentMinimalTable {
+#StudentMinimalTable, #TrainerMinimalTable, #AssignmentMinimalTable, #CourseMinimalTable {
     position: relative;
     border-radius: 25px;
     top: 100px;
 }
-#secondary_tables {
+
+
+#second_tables_container {
     position: relative;
-    
-    justify-content:space-around;
+    justify-content: space-around;
 }
+    #secondary_tables div {
+        margin-bottom: 70px;
+    }
+
 
 table {
     width: 95%;

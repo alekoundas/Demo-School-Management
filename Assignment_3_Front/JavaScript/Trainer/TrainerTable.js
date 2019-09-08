@@ -31,7 +31,7 @@
 function TrainerTableMinimal(CourseId) {
     //Table Header Trainers
     var trow = $.parseHTML("<tr></tr>");
-    $("#course_trainer_thead").append(trow);
+    $("#trainer_thead_minimal").append(trow);
     $(trow).append($.parseHTML("<th> No. </th>"));
     $(trow).append($.parseHTML("<th> First Name </th>"));
     $(trow).append($.parseHTML("<th> Last Name </th>"));
@@ -42,28 +42,24 @@ function TrainerTableMinimal(CourseId) {
         //Table Body Trainers
         for (var i = 0; i < CoursesTrainersArray.length; i++) {
             if (CoursesTrainersArray[i].CourseId == CourseId) {
-
                 for (var j = 0; j < TrainersArray.length; j++) {
                     if (TrainersArray[j].id == CoursesTrainersArray[i].TrainerId) {
                         trow = $.parseHTML("<tr></tr>");
-                        $("#course_trainer_tbody").append(trow);
+                        $("#trainer_tbody_minimal").append(trow);
                         $(trow).append($.parseHTML("<td>" + Counter++ + "</td>"));
                         $(trow).append($.parseHTML("<td>" + TrainersArray[j].Fname + "</td>"));
                         $(trow).append($.parseHTML("<td>" + TrainersArray[j].Lname + "</td>"));
                         $(trow).append($.parseHTML("<td>" + TrainersArray[j].Subject + "</td>"));
                     }
-
                 }
-
             }
-
         }
     }
     else {
         //Table Body Trainers
         for (var i = 0; i < TrainersArray.length; i++) {
             trow = $.parseHTML("<tr></tr>");
-            $("#course_trainer_tbody").append(trow);
+            $("#trainer_tbody_minimal").append(trow);
             $(trow).append($.parseHTML("<td>" + Counter++ + "</td>"));
             $(trow).append($.parseHTML("<td>" + TrainersArray[i].Fname + "</td>"));
             $(trow).append($.parseHTML("<td>" + TrainersArray[i].Lname + "</td>"));
@@ -84,8 +80,6 @@ function TrainerTableCourseModal(CourseId) {
     $(trow).append($.parseHTML("<th> Last Name </th>"));
     $(trow).append($.parseHTML("<th> Subject </th>"));
     $(trow).append($.parseHTML("<th> In Course </th>"));
-
-
 
     //Print Every Table Row With Checked or Not In The Checkbox
     //Every CheckBox Will Keep The TrainerID @ .val()
@@ -121,27 +115,6 @@ function TrainerTableCourseModal(CourseId) {
             $(trow).append($.parseHTML("<td><input type='checkbox' class='form-check-input' name='checkerbox' value='" + TrainersArray[j].id + "' ></td>"));
         }
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 }
 
 

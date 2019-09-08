@@ -1,9 +1,5 @@
 ﻿function GetTrainerTable() {
 
-    //Fill Array If Empty
-    if (TrainersArray.length == 0)
-        DummyTrainers(TrainersArray);
-
     //Add To Body Empty Divs For Add-Edit Trainer Modal
     //Only If The Divs Doesnt Exist Yet
     if (document.getElementById("EditElementModal") == null) {
@@ -32,7 +28,7 @@ function GetTrainerTableMinimal(Id) {
 
 
 
-function DummyTrainers(TrainersArray) {
+function DummyTrainers() {
 
     TrainersArray.push({ id: 1, Fname: "Margaret", Lname: "Fletcher", Subject: "C#    "});
     TrainersArray.push({ id: 2, Fname: "Emma    ", Lname: "Smith   ", Subject: "C#    "});

@@ -78,7 +78,9 @@
     <Content Include="CSS\ResetCss.css" />
     <Content Include="CSS\StyleSheet.css" />
     <Content Include="index.html" />
+    <Content Include="JavaScript\Assignment\IncludeToAssignmentModal.js" />
     <Content Include="JavaScript\Course\AddCourseModal.js" />
+    <Content Include="JavaScript\Course\CourseTableMinimal.html" />
     <Content Include="JavaScript\Course\DeleteCourseModal.js" />
     <Content Include="JavaScript\Course\EditCourseModal.js" />
     <Content Include="JavaScript\Course\Course.js" />
@@ -93,6 +95,7 @@
     <Content Include="JavaScript\Assignment\AssignmentTable.js" />
     <Content Include="JavaScript\Assignment\AssignmentTableMinimal.html" />
     <Content Include="JavaScript\Assignment\AssignmentTableModalBody.html" />
+    <Content Include="JavaScript\Course\CourseTableModalBody.html" />
     <Content Include="JavaScript\Student\StudentTableModalBody.html" />
     <Content Include="JavaScript\Student\StudentTableMinimal.html" />
     <Content Include="JavaScript\Trainer\TrainerTableModalBody.html" />

@@ -1,9 +1,5 @@
 ﻿function GetCourseTable() {
 
-    //Fill Array If Empty
-    if (CoursesArray.length == 0)
-        DummyCourses();
-
     //Add To Body Empty Divs For Add-Edit Course Modal
     //Only If The Divs Doesnt Exist Yet
     if (document.getElementById("EditElementModal") == null) {
@@ -23,9 +19,9 @@
         $("#IncludeElementModal").append(GetIncludeModalCourse()); //Append Completed modal to empty div
     }
     if (document.getElementById("secondary_tables") == null) {
-        $("#course_table_container").append(SecondaryTables());//Append Completed Tables to empty div
+        $("#second_tables_container").append(SecondaryTablesCourse());//Append Completed Tables to empty div
     }
-    CourseTable(CoursesArray);
+    CoursesTable(CoursesArray);
 }
 
 function GetCoursePerElement(CourseId) {
@@ -59,7 +55,7 @@ function DummyCourses() {
     CoursesStudentsArray.push({ id: 2, CourseId: 3, StudentId: 4 });
     CoursesStudentsArray.push({ id: 3, CourseId: 1, StudentId: 1 });
     CoursesStudentsArray.push({ id: 4, CourseId: 1, StudentId: 4 });
-    CoursesStudentsArray.push({ id: 5, CourseId: 2, StudentId: 1 });
+    CoursesStudentsArray.push({ id: 5, CourseId: 2, StudentId: 7 });
     CoursesStudentsArray.push({ id: 6, CourseId: 4, StudentId: 3 });
     CoursesStudentsArray.push({ id: 7, CourseId: 4, StudentId: 2 });
 

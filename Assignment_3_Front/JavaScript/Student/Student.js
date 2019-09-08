@@ -1,8 +1,5 @@
 ﻿function GetStudentTable() {
 
-    //Fill Array If Empty
-    if (StudentsArray.length == 0)
-        DummyStudents(StudentsArray);
 
     //Add To Body Empty Divs For Add-Edit Student Modal
     //Only If The Divs Doesnt Exist Yet
@@ -33,7 +30,7 @@ function GetStudentTableMinimal(Id) {
 
 
 
-function DummyStudents(StudentsArray) {
+function DummyStudents() {
 
     StudentsArray.push({ id: 1, Fname: "Oliver ", Lname: "Adams   ", Tuition: 1500, Birth: new Date(1995, 1, 2) });
     StudentsArray.push({ id: 2, Fname: "Jack   ", Lname: "Allen   ", Tuition: 1300, Birth: new Date(1996, 10, 13) });
