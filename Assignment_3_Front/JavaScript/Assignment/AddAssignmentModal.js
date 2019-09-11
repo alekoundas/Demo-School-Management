@@ -12,17 +12,17 @@
 
     //Modal Body Build Here
     var ModalBody = $.parseHTML("<div class='modal-body'></div>");
-    var ModalBodyRowGrid = $.parseHTML("<div class='row'></div>");//Add data-assignmenttid From EditRow()
+    var ModalBodyRowGrid = $.parseHTML("<div class='row'></div>");
     var ModalBodyColGrid = $.parseHTML("<div class='col-3'></div>");
-    var ModalBodyInputTitle = $.parseHTML("      <input type='text' name='Title'       id='AddModalBodyInputTitle'       class='form-control'  >");
-    var ModalBodyInputDescription = $.parseHTML("<input type='text' name='Description' id='AddModalBodyInputDescription' class='form-control'  >");
-    var ModalBodyInputSubmitD = $.parseHTML("    <input type='date' name='SubmitD'     id='AddModalBodyInputSubmitD'     class='form-control'  >");
+    var ModalBodyInputTitle = $.parseHTML("      <label for='AddModalBodyInputTitle'>       <b>Title</b>      </label> <input type='text' name='Title'       id='AddModalBodyInputTitle'       class='form-control'  >");
+    var ModalBodyInputDescription = $.parseHTML("<label for='AddModalBodyInputDescription'> <b>Description</b></label> <input type='text' name='Description' id='AddModalBodyInputDescription' class='form-control'  >");
+    var ModalBodyInputSubmitD = $.parseHTML("    <label for='AddModalBodyInputSubmitD'>     <b>Submit Day</b> </label> <input type='date' name='SubmitD'     id='AddModalBodyInputSubmitD'     class='form-control'  >");
 
 
     //Modal Footer Build Here
     var ModalFooter = $.parseHTML("<div class='modal-footer'></div>");
     var ModalFooterCancelbt = $.parseHTML("<button type='button' class='btn btn-danger  mr-auto' data-dismiss='modal'>Cancel</button>");
-    var ModalFooterUpdatebt = $.parseHTML("<button type='button' class='btn btn-success' onclick='SubmitAddAssignment(this);RefreshAssignmentHtml();'>Add</button>");
+    var ModalFooterUpdatebt = $.parseHTML("<button type='button' class='btn btn-success' onclick='SubmitAddAssignment(this);'>Add</button>");
 
 
 
@@ -77,9 +77,6 @@
 
 
 
-function AddAssignment() {
-    $("#AddAssignmentModal").modal("show");//show modal 
-}
 
 
 function SubmitAddAssignment(ButtonObj) {
@@ -110,33 +107,43 @@ function SubmitAddAssignment(ButtonObj) {
     //Get An Array Of Every <input> In That Modal
     var ModalBodyCellArray = $(ButtonObj).parent().parent().children(".modal-body").children(".row").children(".col-3").children("input");
 
-
+    var AlertErrorArr = [];
     //Check Every <input> If Its Empty Or Has Incorrect Input
     var InputAreasComplete = true;
     for (var i = 0; i < ModalBodyCellArray.length; i++) {
         //Compare The input By name 
         switch ($(ModalBodyCellArray[i]).attr('name')) {
             case 'Title':
-                if (!ResultTitle)
+                if (!ResultTitle) {
                     InputAreasComplete = false;
+                    AlertErrorArr.push("Title Must Have A-Za-z As Input and Length 3-15");
+                }
                 break;
             case 'Description':
-                if (!ResultDescription)
+                if (!ResultDescription) {
                     InputAreasComplete = false;
+                    AlertErrorArr.push("Description Must Have A-Za-z As Input and Length 3-15");
+                }
                 break;
             case 'SubmitD':
-                if (!ResultSubmitD)
+                if (!ResultSubmitD) {
                     InputAreasComplete = false;
+                    AlertErrorArr.push("Submit Day Must Be Greater Than 19YY/MM/DD ");
+
+                }
                 break;
             default:
                 { }
         }
     }
-    console.log(InputAreasComplete);
     //Check If Every Input Has Correct Val In It
     if (InputAreasComplete) {
         AddAssignmentToDataBase(ModalBodyCellArray);
         ResetModals();
+        RefreshAssignmentHtml();
+    }
+    else {
+        alert(AlertErrorArr);
     }
 }
 

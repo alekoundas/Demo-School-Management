@@ -8,7 +8,9 @@
     $(trow).append($.parseHTML("<th> Type </th>"));
     $(trow).append($.parseHTML("<th> Start Day </th>"));
     $(trow).append($.parseHTML("<th> End Day </th>"));
-    $(trow).append($.parseHTML("<th> Action <button onclick='AddCourse();' data-toggle='modal' data-target='#addElementModal' class=' btn btn-sm btn-success'>+</button><button onclick='RefreshCourseHtml();' class=' btn btn-sm btn-success'>🔄</button> </th>"));
+    $(trow).append($.parseHTML("<th> Action " +
+        "<button class=' btn btn-sm btn-success' data-toggle='modal' data-target='#addElementModal' ><i class='fa fa-plus-circle'></i></button>" +
+        "<button onclick='RefreshCourseHtml();' class=' btn btn-sm btn-success'>                     <i class='fa fa-undo'>       </i></button> </th > "));
 
     //Table Body Courses
     var Counter = 1;
@@ -24,9 +26,9 @@
         $(trow).append($.parseHTML("<td>" + DateBuilder(CoursesArray[i].EndD) + "</td>"));
 
         $(trow).append($.parseHTML("<td>"
-            + "<button onclick = 'EditRowCourse(this," + CoursesArray[i].id + ");' data-toggle = 'modal' data-target = '#editElementModal   ' class = 'btn btn-primary'> Edit   </button > "
-            + "<button onclick = 'DeleteRowCourse(   " + CoursesArray[i].id + ");' data-toggle = 'modal' data-target = '#deleteElementModal ' class = 'btn btn-danger '> Delete </button > "
-            + "<button onclick = 'IncludeRowCourse(  " + CoursesArray[i].id + ");' data-toggle = 'modal' data-target = '#includeElementModal' class = 'btn btn-success'>   Add  </button > "
+            + "<button onclick = 'EditRowCourse(this," + CoursesArray[i].id + ");' data-toggle = 'modal' data-target = '#editElementModal   ' class = 'btn btn-Dark'> <i class='fa fa-edit '       ></i> </button > "
+            + "<button onclick = 'DeleteRowCourse(   " + CoursesArray[i].id + ");' data-toggle = 'modal' data-target = '#deleteElementModal ' class = 'btn btn-Dark '> <i class='fa fa-trash'       ></i> </button > "
+            + "<button onclick = 'IncludeRowCourse(  " + CoursesArray[i].id + ");' data-toggle = 'modal' data-target = '#includeElementModal' class = 'btn btn-Dark'> <i class='fas fa-cog fa-spin'></i> </button > "
             + "</td > "
         ));
     }

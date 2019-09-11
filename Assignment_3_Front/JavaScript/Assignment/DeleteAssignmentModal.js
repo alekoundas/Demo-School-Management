@@ -15,7 +15,7 @@
     //Modal Footer Build Here
     var ModalFooter = $.parseHTML("<div class='modal-footer'></div>");
     var ModalFooterCancelbt = $.parseHTML("<button type='button' class='btn btn-success mr-auto' data-dismiss='modal'>Cancel</button>");
-    var ModalFooterUpdatebt = $.parseHTML("<button type='button' class='btn btn-danger ' id = 'DeleteAssignmentModalButton' onclick='RefreshAssignmentHtml();'>I Understand</button>");
+    var ModalFooterUpdatebt = $.parseHTML("<button type='button' class='btn btn-info ' id = 'DeleteAssignmentModalButton' onclick='RefreshAssignmentHtml();'>I Understand</button>");
 
 
 

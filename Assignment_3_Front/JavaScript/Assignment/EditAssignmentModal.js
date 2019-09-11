@@ -11,12 +11,16 @@
 
 
     //Modal Body Build Here
-    var ModalBody = $.parseHTML("<div class='modal-body'>  </div>");
-    var ModalBodyRowGrid = $.parseHTML("<div class='row'>  </div>");//Add data-assignmentid From EditRow()
-    var ModalBodyColGrid = $.parseHTML("<div class='col-3'></div>");
-    var ModalBodyTitle = $.parseHTML("      <p onclick='ToggleModalBodyCellAssignment(this);' id='ModalBodyTitle'>  </p>");
+    var ModalBody = $.parseHTML("  <div class='modal-body'> </div>");
+    var ModalBodyRowGrid = $.parseHTML("<div class='row'  > </div>");
+    var ModalBodyRowGrid2 = $.parseHTML("<div class='row'  > </div>");
+    var ModalBodyColGrid = $.parseHTML("<div class='col-4'> </div>");
+    var ModalBodyTitleHeader = $.parseHTML("      <p><b>  Title        </b/></p>");
+    var ModalBodyDescriptionHeader = $.parseHTML("<p><b>   Description </b/></p>");
+    var ModalBodySubmitDHeader = $.parseHTML("    <p><b>   Submit Day  </b/></p>");
+    var ModalBodyTitle = $.parseHTML("      <p onclick='ToggleModalBodyCellAssignment(this);' id='ModalBodyTitle'>        </p>");
     var ModalBodyDescription = $.parseHTML("<p onclick='ToggleModalBodyCellAssignment(this);' id='ModalBodyDescription'>  </p>");
-    var ModalBodySubmitD = $.parseHTML("    <p onclick='ToggleModalBodyCellAssignment(this);' id='ModalBodySubmitD'></p>");
+    var ModalBodySubmitD = $.parseHTML("    <p onclick='ToggleModalBodyCellAssignment(this);' id='ModalBodySubmitD'>      </p>");
     var ModalBodyInputTitle = $.parseHTML("      <input type='text' name='Title'       id='EditModalBodyInputTitle'       style = 'display:none;' class='form-control'  >");
     var ModalBodyInputDescription = $.parseHTML("<input type='text' name='Description' id='EditModalBodyInputDescription' style = 'display:none;' class='form-control'  >");
     var ModalBodyInputSubmitD = $.parseHTML("    <input type='date' name='SubmitD'     id='EditModalBodyInputSubmitD'     style = 'display:none;' class='form-control'  >");
@@ -25,7 +29,7 @@
     //Modal Footer Build Here
     var ModalFooter = $.parseHTML("<div class='modal-footer'></div>");
     var ModalFooterCancelbt = $.parseHTML("<button type='button' class='btn btn-danger  mr-auto' data-dismiss='modal'>Cancel</button>");
-    var ModalFooterUpdatebt = $.parseHTML("<button type='button' class='btn btn-success' onclick='SubmitEditButtonAssignment(this);RefreshAssignmentHtml();'>Update</button>");
+    var ModalFooterUpdatebt = $.parseHTML("<button type='button' class='btn btn-success' onclick='SubmitEditButtonAssignment(this);'>Update</button>");
 
 
 
@@ -42,22 +46,43 @@
 
     //Body
     $(ModalCotent).append(ModalBody);
+
+
     //Bootstrap Row
     $(ModalBody).append(ModalBodyRowGrid);
+    //Bootstrap Col
+    $(ModalBodyColGrid).append(ModalBodyTitleHeader);
+    $(ModalBodyColGrid).clone().appendTo(ModalBodyRowGrid);
+    $(ModalBodyTitleHeader).remove();//Remove the input because clone() will cary any next inputs with it
+
+    //Bootstrap Col
+    $(ModalBodyColGrid).append(ModalBodyDescriptionHeader);
+    $(ModalBodyColGrid).clone().appendTo(ModalBodyRowGrid);
+    $(ModalBodyDescriptionHeader).remove();
+
+    //Bootstrap Col
+    $(ModalBodyColGrid).append(ModalBodySubmitDHeader);
+    $(ModalBodyColGrid).clone().appendTo(ModalBodyRowGrid);
+    $(ModalBodySubmitDHeader).remove();
+
+
+
+    //Bootstrap Row
+    $(ModalBody).append(ModalBodyRowGrid2);
 
     //Bootstrap Col
     $(ModalBodyColGrid).append(ModalBodyInputTitle);
-    $(ModalBodyColGrid).clone().appendTo(ModalBodyRowGrid).append(ModalBodyTitle);
+    $(ModalBodyColGrid).clone().appendTo(ModalBodyRowGrid2).append(ModalBodyTitle);
     $(ModalBodyInputTitle).remove();//Remove the input because clone() will cary any next inputs with it
 
     //Bootstrap Col
     $(ModalBodyColGrid).append(ModalBodyInputDescription);
-    $(ModalBodyColGrid).clone().appendTo(ModalBodyRowGrid).append(ModalBodyDescription);
+    $(ModalBodyColGrid).clone().appendTo(ModalBodyRowGrid2).append(ModalBodyDescription);
     $(ModalBodyInputDescription).remove();
 
     //Bootstrap Col
     $(ModalBodyColGrid).append(ModalBodyInputSubmitD);
-    $(ModalBodyColGrid).clone().appendTo(ModalBodyRowGrid).append(ModalBodySubmitD);
+    $(ModalBodyColGrid).clone().appendTo(ModalBodyRowGrid2).append(ModalBodySubmitD);
     $(ModalBodyInputSubmitD).remove();
 
     //Footer
@@ -68,15 +93,12 @@
     return BaseModal;
 }
 
-
-
+//Global Var
+var AssignmentID;
 
 function EditRowAssignment(row, AssignmentId) {
-    $("#EditAssignmentModal").modal("show");//show modal 
 
-    //Add data- To The row Of The Modal Body With The Assignment Id
-    //So I Can Retrieve It Later
-    $(".modal-body .row").attr("data-assignmentid", AssignmentId);
+    AssignmentID=AssignmentId;
 
     //Retrieve Data From table
     var Title = $(row).parent().siblings("td:eq( 1 )").text();
@@ -90,9 +112,6 @@ function EditRowAssignment(row, AssignmentId) {
 }
 
 
-
-
-
 function SubmitEditButtonAssignment(ButtonObj) {
 
     //Get Values From Inputs
@@ -100,6 +119,10 @@ function SubmitEditButtonAssignment(ButtonObj) {
     var Description = $('#EditModalBodyInputDescription').val();
     var SubmitD = $('#EditModalBodyInputSubmitD').val();
 
+
+    console.log(Title);
+    console.log(Description);
+    console.log(SubmitD);
 
     //Initiate Regular Expretions
     var StringExp = new RegExp("^[A-Za-z]{3,15}$", '');
@@ -118,9 +141,10 @@ function SubmitEditButtonAssignment(ButtonObj) {
 
 
     //Get An Array Of Every <input> In That Modal
-    var ModalBodyCellArray = $(ButtonObj).parent().parent().children(".modal-body").children(".row").children(".col-3").children("input");
+    var ModalBodyCellArray = $(ButtonObj).parent().parent().children(".modal-body").children(".row").children(".col-4").children("input");
 
     //Check Every <input> If Its Empty Or Has Incorrect Input
+    var AlertErrorArr = [];
     var EditedInputsOnly = [];
     var InputAreasComplete = true;
     for (var i = 0; i < ModalBodyCellArray.length; i++)
@@ -134,6 +158,7 @@ function SubmitEditButtonAssignment(ButtonObj) {
                         EditedInputsOnly.push(ModalBodyCellArray[i]);
                         break;
                     }
+                    AlertErrorArr.push("Title Must Have A-Za-z As Input and Length 3-15");
                     InputAreasComplete = false;
                     break;
                 case 'Description':
@@ -142,6 +167,8 @@ function SubmitEditButtonAssignment(ButtonObj) {
                         break;
                     }
                     InputAreasComplete = false;
+                    AlertErrorArr.push("Description Must Have A-Za-z As Input and Length 3-15");
+
                     break;               
                 case 'SubmitD':
                     if (ResultSubmitD) {
@@ -149,6 +176,8 @@ function SubmitEditButtonAssignment(ButtonObj) {
                         break;
                     }
                     InputAreasComplete = false;
+                    AlertErrorArr.push("Submit Day Must Be Greater Than 19YY/MM/DD ");
+
                     break;
                 default:
                     { }
@@ -162,18 +191,20 @@ function SubmitEditButtonAssignment(ButtonObj) {
         ToggleModalBodyCellAssignment(EditedInputsOnly);
         EditAssignment(EditedInputsOnly); //Edit Assignment Attributes       
         ResetModals();
+        RefreshAssignmentHtml();
+    }
+    else {
+        alert(AlertErrorArr);
     }
 }
 
 
 
 function EditAssignment(AssignmentEdited) {
-    //Get The Id Of The Assignment To Be Edited
-    var AssignmentId = $(AssignmentEdited[0]).parents('div.row').attr("data-assignmentid");
 
     //From All Assignments Find The One With Matching Id
     for (var i = 0; i < AssignmentsArray.length; i++) {
-        if (AssignmentsArray[i].id == AssignmentId) {
+        if (AssignmentsArray[i].id == AssignmentID) {
             //For Every Cell That Needs Edit Make The Changes Permanent To The AssignmentArray
             for (var j = 0; j < AssignmentEdited.length; j++) {
                 switch ($(AssignmentEdited[j]).attr('name')) {
@@ -184,8 +215,6 @@ function EditAssignment(AssignmentEdited) {
                         AssignmentsArray[i].Description = $(AssignmentEdited[j]).val();
                         break;                  
                     case 'SubmitD':
-
-                        console.log("Asdfasdf");
                         AssignmentsArray[i].SubDateTime = new Date($(AssignmentEdited[j]).val());
                         break;
                     default:

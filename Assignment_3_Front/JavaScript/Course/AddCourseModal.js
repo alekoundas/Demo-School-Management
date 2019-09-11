@@ -12,19 +12,19 @@
 
     //Modal Body Build Here
     var ModalBody = $.parseHTML("<div class='modal-body'></div>");
-    var ModalBodyRowGrid = $.parseHTML("<div class='row'></div>");//Add data-Courseid From EditRow()
-    var ModalBodyColGrid = $.parseHTML("<div class='col-3'></div>");
-    var ModalBodyInputTitle = $.parseHTML(" <input type='text' name='Title'  id='AddModalBodyInputTitle'   class='form-control'  >");
-    var ModalBodyInputStream = $.parseHTML("<input type='text' name='Stream' id='AddModalBodyInputStream'  class='form-control'  >");
-    var ModalBodyInputType = $.parseHTML("  <input type='text' name='Type'   id='AddModalBodyInputType'    class='form-control'  >");
-    var ModalBodyInputStartD = $.parseHTML("<input type='date' name='StartD' id='AddModalBodyInputStartD'  class='form-control'  >");
-    var ModalBodyInputEndD = $.parseHTML("  <input type='date' name='EndD'   id='AddModalBodyInputEndD'    class='form-control'  >");
-
+    var ModalBodyRowGrid = $.parseHTML("<div class='row'></div>");
+    var ModalBodyColGrid = $.parseHTML("<div class=' col-6'></div>");
+    var ModalBodyInputTitle = $.parseHTML(" <label for='AddModalBodyInputTitle'>  <b>Title     </b></label>  <input type='text' name='Title'  id='AddModalBodyInputTitle'   class='form-control'  >");
+    var ModalBodyInputStream = $.parseHTML("<label for='AddModalBodyInputStream'> <b>Stream    </b></label>  <input type='text' name='Stream' id='AddModalBodyInputStream'  class='form-control'  >");
+    var ModalBodyInputType = $.parseHTML("  <label for='AddModalBodyInputType'>   <b>Type      </b></label>  <input type='text' name='Type'   id='AddModalBodyInputType'    class='form-control'  >");
+    var ModalBodyInputStartD = $.parseHTML("<label for='AddModalBodyInputStartD'> <b>Start Day </b></label>  <input type='date' name='StartD' id='AddModalBodyInputStartD'  class='form-control'  >");
+    var ModalBodyInputEndD = $.parseHTML("  <label for='AddModalBodyInputEndD'>   <b>End Day   </b></label>  <input type='date' name='EndD'   id='AddModalBodyInputEndD'    class='form-control'  >");
+                                                                                       
 
     //Modal Footer Build Here
     var ModalFooter = $.parseHTML("<div class='modal-footer'></div>");
     var ModalFooterCancelbt = $.parseHTML("<button type='button' class='btn btn-danger  mr-auto' data-dismiss='modal'>Cancel</button>");
-    var ModalFooterUpdatebt = $.parseHTML("<button type='button' class='btn btn-success' onclick='SubmitAddCourse(this);RefreshCourseHtml();'>Add</button>");
+    var ModalFooterUpdatebt = $.parseHTML("<button type='button' class='btn btn-success' onclick='SubmitAddCourse(this);'>Update Changes</button>");
 
 
 
@@ -69,6 +69,7 @@
     $(ModalBodyColGrid).clone().appendTo(ModalBodyRowGrid);
     $(ModalBodyInputEndD).remove();
 
+
     //Footer
     $(ModalCotent).append(ModalFooter);
     $(ModalFooter).append(ModalFooterCancelbt);
@@ -85,12 +86,6 @@
 
 
 
-
-
-
-function AddCourse() {
-    $("#AddCourseModal").modal("show");//show modal 
-}
 
 
 function SubmitAddCourse(ButtonObj) {
@@ -116,42 +111,49 @@ function SubmitAddCourse(ButtonObj) {
 
 
     //Turn To red-green The Input Border Color Of The Wrong-Correct RegEx Inputs
-    (ResultTitle) ? $('  #AddModalBodyInputTitle  ').removeClass("is-invalid").addClass("is-valid") : $('#AddModalBodyInputTitle  ').removeClass("is-valid").addClass("is-invalid");
-    (ResultStream) ? $('  #AddModalBodyInputStream  ').removeClass("is-invalid").addClass("is-valid") : $('#AddModalBodyInputStream  ').removeClass("is-valid").addClass("is-invalid");
-    (ResultType) ? $('#AddModalBodyInputType').removeClass("is-invalid").addClass("is-valid") : $('#AddModalBodyInputType').removeClass("is-valid").addClass("is-invalid");
-    (ResultStartD) ? $('  #AddModalBodyInputStartD  ').removeClass("is-invalid").addClass("is-valid") : $('#AddModalBodyInputStartD  ').removeClass("is-valid").addClass("is-invalid");
-    (ResultEndD) ? $('  #AddModalBodyInputEndD  ').removeClass("is-invalid").addClass("is-valid") : $('#AddModalBodyInputEndD  ').removeClass("is-valid").addClass("is-invalid");
+    (ResultTitle) ? $(' #AddModalBodyInputTitle ').removeClass("is-invalid").addClass("is-valid") : $('#AddModalBodyInputTitle  ').removeClass("is-valid").addClass("is-invalid");
+    (ResultStream) ? $('#AddModalBodyInputStream').removeClass("is-invalid").addClass("is-valid") : $('#AddModalBodyInputStream ').removeClass("is-valid").addClass("is-invalid");
+    (ResultType) ? $('  #AddModalBodyInputType  ').removeClass("is-invalid").addClass("is-valid") : $('#AddModalBodyInputType   ').removeClass("is-valid").addClass("is-invalid");
+    (ResultStartD) ? $('#AddModalBodyInputStartD').removeClass("is-invalid").addClass("is-valid") : $('#AddModalBodyInputStartD ').removeClass("is-valid").addClass("is-invalid");
+    (ResultEndD) ? $('  #AddModalBodyInputEndD  ').removeClass("is-invalid").addClass("is-valid") : $('#AddModalBodyInputEndD   ').removeClass("is-valid").addClass("is-invalid");
 
 
     //Get An Array Of Every <input> In That Modal
-    var ModalBodyCellArray = $(ButtonObj).parent().parent().children(".modal-body").children(".row").children(".col-3").children("input");
+    var ModalBodyCellArray = $(ButtonObj).parent().parent().children(".modal-body").children(".row").children(".col-6").children("input");
 
 
     //Check Every <input> If Its Empty Or Has Incorrect Input
+    var AlertErrorArr = [];
     var InputAreasComplete = true;
     for (var i = 0; i < ModalBodyCellArray.length; i++) {
         //Compare The input By name 
         switch ($(ModalBodyCellArray[i]).attr('name')) {
             case 'Title':
-                if (!ResultTitle)
+                if (!ResultTitle) {
                     InputAreasComplete = false;
+                    AlertErrorArr.push("Title Must Have A-Za-z As Input and Length 3-15");
+                }
                 break;
             case 'Stream':
-                if (!ResultStream)
+                if (!ResultStream) {
                     InputAreasComplete = false;
-                break;
+                    AlertErrorArr.push("Stream Must Have A-Za-z As Input and Length 3-15");
+                }
             case 'Type':
-                if (!ResultType)
+                if (!ResultType) {
                     InputAreasComplete = false;
-                break;
+                    AlertErrorArr.push("ResultType Must Have A-Za-z As Input and Length 3-15");
+                }
             case 'StartD':
-                if (!ResultStartD)
+                if (!ResultStartD) {
                     InputAreasComplete = false;
-                break;
+                    AlertErrorArr.push("Start Day Must Be Greater Than 19YY/MM/DD ");
+                }
             case 'EndD':
-                if (!ResultEndD)
+                if (!ResultEndD) {
                     InputAreasComplete = false;
-                break;
+                    AlertErrorArr.push("End Day Must Be Greater Than 19YY/MM/DD ");
+                }
             default:
                 { }
         }
@@ -160,6 +162,10 @@ function SubmitAddCourse(ButtonObj) {
     if (InputAreasComplete) {
         AddCourseToDataBase(ModalBodyCellArray);
         ResetModals();
+        RefreshCourseHtml();
+    }
+    else {
+        alert(AlertErrorArr);
     }
 }
 

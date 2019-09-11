@@ -13,15 +13,18 @@
 
     //Modal Body Build Here
     var ModalBody = $.parseHTML("<div class='modal-body'></div>");
-    var ModalBodyRowGrid = $.parseHTML("<div class='row'></div>");//Add data-trainerid From EditRow()
-    var ModalBodyColGrid = $.parseHTML("<div class='col-3'></div>");
+    var ModalBodyRowGrid = $.parseHTML("<div class='row'></div>");
+    var ModalBodyRowGrid2 = $.parseHTML("<div class='row'></div>");
+    var ModalBodyColGrid = $.parseHTML("<div class='col-4'></div>");
+    var ModalBodyFnameHead = $.parseHTML("  <p><b> First Name</b></p>");
+    var ModalBodyLnameHead = $.parseHTML("  <p><b> Last Name </b></p>");
+    var ModalBodySubjectHead = $.parseHTML("<p><b> Subject   </b></p>");
     var ModalBodyFname = $.parseHTML("  <p onclick='ToggleModalBodyCellTrainer(this);' id='ModalBodyFname'>  </p>");
     var ModalBodyLname = $.parseHTML("  <p onclick='ToggleModalBodyCellTrainer(this);' id='ModalBodyLname'>  </p>");
     var ModalBodySubject = $.parseHTML("<p onclick='ToggleModalBodyCellTrainer(this);' id='ModalBodySubject'></p>");
-    var ModalBodyInputFname = $.parseHTML("  <input type='text' name='Fname'    id='EditModalBodyInputFname'  style = 'display:none;' class='form-control'  >");
-    var ModalBodyInputLname = $.parseHTML("  <input type='text' name='Lname'    id='EditModalBodyInputLname'  style = 'display:none;' class='form-control'  >");
-    var ModalBodyInputSubject = $.parseHTML("<input type='text' name='Subject'  id='EditModalBodyInputSubject'style = 'display:none;' class='form-control'  >");
-    
+    var ModalBodyInputFname = $.parseHTML("    <input type='text' name='Fname'    id='EditModalBodyInputFname'  style = 'display:none;' class='form-control'  >");
+    var ModalBodyInputLname = $.parseHTML("    <input type='text' name='Lname'    id='EditModalBodyInputLname'  style = 'display:none;' class='form-control'  >");
+    var ModalBodyInputSubject = $.parseHTML("  <input type='text' name='Subject'  id='EditModalBodyInputSubject'style = 'display:none;' class='form-control'  >");
 
 
     //Modal Footer Build Here
@@ -44,22 +47,46 @@
 
     //Body
     $(ModalCotent).append(ModalBody);
-    //Bootstrap Row
+
+
+    //Bootstrap Row1
     $(ModalBody).append(ModalBodyRowGrid);
 
     //Bootstrap Col
+    $(ModalBodyColGrid).append(ModalBodyFnameHead);
+    $(ModalBodyColGrid).clone().appendTo(ModalBodyRowGrid);
+    $(ModalBodyFnameHead).remove();//Remove the input because clone() will cary any next inputs with it
+
+    //Bootstrap Col
+    $(ModalBodyColGrid).append(ModalBodyLnameHead);
+    $(ModalBodyColGrid).clone().appendTo(ModalBodyRowGrid);
+    $(ModalBodyLnameHead).remove();
+
+    //Bootstrap Col
+    $(ModalBodyColGrid).append(ModalBodySubjectHead);
+    $(ModalBodyColGrid).clone().appendTo(ModalBodyRowGrid);
+    $(ModalBodySubjectHead).remove();
+
+
+
+
+
+    //Bootstrap Row 2
+    $(ModalBody).append(ModalBodyRowGrid2);
+
+    //Bootstrap Col
     $(ModalBodyColGrid).append(ModalBodyInputFname);
-    $(ModalBodyColGrid).clone().appendTo(ModalBodyRowGrid).append(ModalBodyFname);
+    $(ModalBodyColGrid).clone().appendTo(ModalBodyRowGrid2).append(ModalBodyFname);
     $(ModalBodyInputFname).remove();//Remove the input because clone() will cary any next inputs with it
 
     //Bootstrap Col
     $(ModalBodyColGrid).append(ModalBodyInputLname);
-    $(ModalBodyColGrid).clone().appendTo(ModalBodyRowGrid).append(ModalBodyLname);
+    $(ModalBodyColGrid).clone().appendTo(ModalBodyRowGrid2).append(ModalBodyLname);
     $(ModalBodyInputLname).remove();
 
     //Bootstrap Col
     $(ModalBodyColGrid).append(ModalBodyInputSubject);
-    $(ModalBodyColGrid).clone().appendTo(ModalBodyRowGrid).append(ModalBodySubject);
+    $(ModalBodyColGrid).clone().appendTo(ModalBodyRowGrid2).append(ModalBodySubject);
     $(ModalBodyInputSubject).remove();
 
     //Footer
@@ -101,9 +128,10 @@ function SubmitEditButtonTrainer(ButtonObj) {
 
 
     //Get An Array Of Every <input> In That Modal
-    var ModalBodyCellArray = $(ButtonObj).parent().parent().children(".modal-body").children(".row").children(".col-3").children("input");
+    var ModalBodyCellArray = $(ButtonObj).parent().parent().children(".modal-body").children(".row").children(".col-4").children("input");
 
     //Check Every <input> If Its Empty Or Has Incorrect Input
+    var AlertErrorArr = [];
     var EditedInputsOnly = [];
     var InputAreasComplete = true;
     for (var i = 0; i < ModalBodyCellArray.length; i++) {
@@ -115,6 +143,7 @@ function SubmitEditButtonTrainer(ButtonObj) {
                         EditedInputsOnly.push(ModalBodyCellArray[i]);
                         break;
                     }
+                    AlertErrorArr.push("First Name Must Have A-Za-z As Input and Length 3-15");
                     InputAreasComplete = false;
                     break;
                 case 'Lname':
@@ -122,6 +151,7 @@ function SubmitEditButtonTrainer(ButtonObj) {
                         EditedInputsOnly.push(ModalBodyCellArray[i]);
                         break;
                     }
+                    AlertErrorArr.push("Last Name Must Have A-Za-z As Input and Length 3-15");
                     InputAreasComplete = false;
                     break;
                 case 'Subject':
@@ -129,6 +159,7 @@ function SubmitEditButtonTrainer(ButtonObj) {
                         EditedInputsOnly.push(ModalBodyCellArray[i]);
                         break;
                     }
+                    AlertErrorArr.push("Subject Must Have A-Za-z As Input and Length 3-15");
                     InputAreasComplete = false;
                     break;
                 default:
@@ -138,12 +169,15 @@ function SubmitEditButtonTrainer(ButtonObj) {
     }
     //Check If Every Input Has Correct Val In It
     if (InputAreasComplete) {
-        
+
         for (var i = 0; i < EditedInputsOnly.length; i++)//Hides The Correct input And Show The p
             ToggleModalBodyCellTrainer(EditedInputsOnly[i]);
 
         EditTrainerFromDataBase(EditedInputsOnly); //Edit Trainer Attributes  
         ResetModals();
+    }
+    else {
+        alert(AlertErrorArr);
     }
 }
 
@@ -156,7 +190,7 @@ function EditTrainerFromDataBase(TrainerEdited) {
     for (var i = 0; i < TrainersArray.length; i++) {
         if (TrainersArray[i].id == TrainerId) {
             //For Every Cell That Needs Edit Make The Changes Permanent To The TrainerArray
-            for (var j = 0; j < TrainerEdited.length; j++) {           
+            for (var j = 0; j < TrainerEdited.length; j++) {
                 switch ($(TrainerEdited[j]).attr('name')) {
                     case 'Fname':
                         TrainersArray[i].Fname = $(TrainerEdited[j]).val();
@@ -169,7 +203,7 @@ function EditTrainerFromDataBase(TrainerEdited) {
                         TrainersArray[i].Subject = $(TrainerEdited[j]).val();
                         break;
                     default:
-                        {}
+                        { }
                 }
             }
         }

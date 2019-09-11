@@ -10,15 +10,16 @@
     var ModalHeaderButton = $.parseHTML("<button type ='button' class='close' data-dismiss='modal' aria-label='Close'><span aria-hidden='true'>&times;</span></button >");
 
     //Radio Buttons To Select Body
-    var ModalBodyClassRadio = $.parseHTML("<div class='radio'></div>");
-    var ModalBodyRadioInputStudent = $.parseHTML("<label class='radio-inline' for='StudentRadio' onclick='ShowAssignmentTableInModal(this)'> <input type='radio'  id='StudentRadio'  name='RadioBt'>  Students  </label>");
-    var ModalBodyRadioInputCourse = $.parseHTML(" <label class='radio-inline' for='CourseRadio'  onclick='ShowAssignmentTableInModal(this)'> <input type='radio'  id='CourseRadio'   name='RadioBt'>  Courses   </label>");
+    var ModalBodyClassRadio = $.parseHTML("<div id='AssignmentPerCoursePerStudentModalBodyTopBt'></div>");
+    var ModalBodyRadioInputStudent = $.parseHTML("<button   id='StudentRadio' onclick='ShowAssignmentTableInModal(this)' class = 'btn btn-primary'name='RadioBt'>  Students  </button>");
+    var ModalBodyRadioInputCourse = $.parseHTML("<button   id='CourseRadio' onclick='ShowAssignmentTableInModal(this)' class = 'btn btn-primary'name='RadioBt'>  Courses  </button>");
 
 
     //Modal Body Build Here
     var ModalBody = $.parseHTML("       <div class= 'modal-body'> </div>");
     var ModalBodyRowGrid = $.parseHTML("<div class= 'row'       > </div>");
     var ModalBodyTitle = $.parseHTML("  <p>Select a Course To Edit</p>");
+    var ModalBodyTitle2 = $.parseHTML("  <p class='text-muted'>Here You Can Update Assignment Per Students Or Assignment Per Course Per Student.By Clicking Update The Changes Been Made Are Saved To The DataBase And Refresheses The Tables.You Can Select A Course(Courses Included To Assignment) To See The Students Per Assignment Per Course.Also Modal Doesnt Auto Dismish On Submit</p>");
 
     //Tables
     var ModalBodyTableCourse = $.parseHTML(" <div id='CourseModalIncludeTableTop' ></div>");
@@ -29,7 +30,7 @@
     //Modal Footer Build Here
     var ModalFooter = $.parseHTML("<div class='modal-footer'></div>");
     var ModalFooterCancelbt = $.parseHTML("<button type='button' class='btn btn-danger  mr-auto' data-dismiss='modal'>Cancel</button>");
-    var ModalFooterUpdatebt = $.parseHTML("<button type='button' class='btn btn-success' onclick='SubmitIncludeAssignment(this);'>Include</button>");
+    var ModalFooterUpdatebt = $.parseHTML("<button type='button' class='btn btn-success' onclick='SubmitIncludeAssignment(this);'>Update Changes</button>");
 
 
 
@@ -53,7 +54,7 @@
 
     //Bootstrap Body Row 1
     $(ModalBodyRowGrid).append(ModalBodyTitle);
-    $(ModalBodyRowGrid).clone().appendTo(ModalBody);
+    $(ModalBodyRowGrid).clone().appendTo(ModalBody).append(ModalBodyTitle2);
     $(ModalBodyTitle).remove();//Remove the input because clone() will cary any next inputs with it
 
 
@@ -165,6 +166,7 @@ function SubmitIncludeAssignment(SubmitBt, TempDb) {
         TemporaryDb = UpdateAssignmentCourseData(UpdateCoursesAssignmnet, "course", TempDb);
         return UpdateAssignmentCourseData(UpdateCoursesAssignmnet, "course", TempDb);
     }
+    RefreshCourseHtmlModalBody(AssignmentID, CoursesAssignmentsArray);
 }
 
 //Will Show Student Table To Edit 
@@ -178,7 +180,7 @@ function SelectedCourseInAssignmentAdd(InputObj, Checked, CourseId) {
     if (Checked) {
         console.log(CourseID, AssignmentID);
         RefreshStudentHtmlCourseModalBody(CourseID,AssignmentID);
-        //RefreshCourseHtmlModalBody(AssignmentID, CoursesAssignmentsArray);
+        
         $(InputObj).siblings().css('background-color', 'white');
         $("#CourseModalIncludeTable").css('display', 'block');
         $(InputObj).css('background-color', 'rgba(0, 58, 219, 0.36)');

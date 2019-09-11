@@ -2,7 +2,7 @@
 html body {
     background-color: rgba(76, 73, 73, 0.75);
     height: 9999px;
-    /*Without overflow When The Modal Resets, Page Scroll Is Disabled*/
+    /*Without overflow When The Modal Resets, Page Scroll Gets Disabled*/
     overflow: visible !important;
 }
 
@@ -10,6 +10,18 @@ html body {
     background-color: rgba(228, 233, 255, 0.73);
 }
 
+/*Every Table Header*/ 
+thead tr th:first-child{
+
+    border-top-left-radius: 15px;
+}
+thead tr th:last-child {
+    border-top-right-radius: 15px;
+}
+
+.modal-body {
+    justify-content: center;
+}
 
 img {
     height: 40px;
@@ -58,3 +70,24 @@ table {
     position: relative;
     
 }
+.modal-body .row {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    justify-content:center;
+    padding-top: 25px;
+    margin:0px;
+}
+.modal-body  {
+
+    margin: 0px;
+}
+
+#AssignmentPerCoursePerStudentModalBodyTopBt {
+    text-align: center;
+
+}
+    #AssignmentPerCoursePerStudentModalBodyTopBt button {
+        padding: 15px;
+        margin: 15px;
+    }

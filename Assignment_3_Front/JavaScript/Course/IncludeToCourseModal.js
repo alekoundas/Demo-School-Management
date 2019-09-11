@@ -6,14 +6,14 @@
 
     //Modal Header Build Here
     var ModalHeader = $.parseHTML("<div class='modal-header'></div>");
-    var ModalHeaderTitle = $.parseHTML("<h5 class='modal-title' >Include New Course</h5>");
+    var ModalHeaderTitle = $.parseHTML("<h5 class='modal-title' >Include To Course</h5>");
     var ModalHeaderButton = $.parseHTML("<button type ='button' class='close' data-dismiss='modal' aria-label='Close'><span aria-hidden='true'>&times;</span></button >");
 
 
     //Modal Body Build Here
     var ModalBody = $.parseHTML("       <div class= 'modal-body'> </div>");
     var ModalBodyRowGrid = $.parseHTML("<div class= 'row'       > </div>");//Set data-Courseid From EditRow()
-    var ModalBodyTitle = $.parseHTML("<p>Select Student Or Trainer To Be Included To Course</p>");
+    var ModalBodyTitle = $.parseHTML("<p>Select Student Or Trainer Or Assignment To Be Included In Course</p>");
 
     //Radio Buttons
     var ModalBodyClassRadio = $.parseHTML("<div class='radio'></div>");

@@ -13,12 +13,11 @@
     //Modal Body Build Here
     var ModalBody = $.parseHTML("<div class='modal-body'></div>");
     var ModalBodyRowGrid = $.parseHTML("<div class='row'></div>");//Add data-studentid From EditRow()
-    var ModalBodyColGrid = $.parseHTML("<div class='col-3'></div>");
-    var ModalBodyInputFname = $.parseHTML("  <input type='text' name='Fname'   class='form-control'  id='AddModalBodyInputFname'     >");
-    var ModalBodyInputLname = $.parseHTML("  <input type='text' name='Lname'   class='form-control'  id='AddModalBodyInputLname'     >");
-    var ModalBodyInputTuition = $.parseHTML("<input type='text' name='Tuition' class='form-control'  id='AddModalBodyInputTuition'   >");
-    var ModalBodyInputBirth = $.parseHTML("  <input type='date' name='Birth'   class='form-control'  id='AddModalBodyInputBirth'     >");
-
+    var ModalBodyColGrid = $.parseHTML("<div class='col-6'></div>");
+    var ModalBodyInputFname = $.parseHTML("  <label for='AddModalBodyInputFname'>   <b>FirstName </b></label>    <input type='text' name='Fname'   class='form-control'  id='AddModalBodyInputFname'  >");
+    var ModalBodyInputLname = $.parseHTML("  <label for='AddModalBodyInputLname'>   <b>Last Name </b></label>    <input type='text' name='Lname'   class='form-control'  id='AddModalBodyInputLname'  >");
+    var ModalBodyInputTuition = $.parseHTML("<label for='AddModalBodyInputTuition'> <b>Tuition   </b></label>    <input type='text' name='Tuition' class='form-control'  id='AddModalBodyInputTuition'>");
+    var ModalBodyInputBirth = $.parseHTML("  <label for='AddModalBodyInputBirth'>   <b> Birth    </b></label>    <input type='date' name='Birth'   class='form-control'  id='AddModalBodyInputBirth'  >");
 
     //Modal Footer Build Here
     var ModalFooter = $.parseHTML("<div class='modal-footer'></div>");
@@ -79,9 +78,6 @@
 
 
 
-function AddStudent() {
-    $("#AddStudentModal").modal("show");//show modal 
-}
 
 
 function SubmitAddStudent(ButtonObj) {
@@ -114,29 +110,47 @@ function SubmitAddStudent(ButtonObj) {
 
 
     //Get An Array Of Every <input> In That Modal
-    var ModalBodyCellArray = $(ButtonObj).parent().parent().children(".modal-body").children(".row").children(".col-3").children("input");
+    var ModalBodyCellArray = $(ButtonObj).parent().parent().children(".modal-body").children(".row").children(".col-6").children("input");
 
 
     //Check Every <input> If Its Empty Or Has Incorrect Input
+    var EditedInputsOnly = [];
+    var AlertErrorArr = [];
     var InputAreasComplete = true;
     for (var i = 0; i < ModalBodyCellArray.length; i++) {
         //Compare The input By name 
         switch ($(ModalBodyCellArray[i]).attr('name')) {
             case 'Fname':
-                if (!ResultFname)
-                    InputAreasComplete = false;
+                if (ResultFname) {
+                    EditedInputsOnly.push(ModalBodyCellArray[i]);
+                    break;
+                }
+                AlertErrorArr.push("First Name Must Have A-Za-z As Input and Length 3-15");
+                InputAreasComplete = false;
                 break;
             case 'Lname':
-                if (!ResultLname)
-                    InputAreasComplete = false;
+                if (ResultLname) {
+                    EditedInputsOnly.push(ModalBodyCellArray[i]);
+                    break;
+                }
+                AlertErrorArr.push("Last Name Must Have A-Za-z As Input and Length 3-15");
+                InputAreasComplete = false;
                 break;
             case 'Tuition':
-                if (!ResultTuition)
-                    InputAreasComplete = false;
+                if (ResultTuition) {
+                    EditedInputsOnly.push(ModalBodyCellArray[i]);
+                    break;
+                }
+                AlertErrorArr.push("Tuition Must Have 0-9  As Input and Length 1-6");
+                InputAreasComplete = false;
                 break;
             case 'Birth':
-                if (!ResultBirth)
-                    InputAreasComplete = false;
+                if (ResultBirth) {
+                    EditedInputsOnly.push(ModalBodyCellArray[i]);
+                    break;
+                }
+                AlertErrorArr.push("Birth Day Must Be Greater Than 19YY/MM/DD ");
+                InputAreasComplete = false;
                 break;
             default:
                 { }
@@ -146,6 +160,9 @@ function SubmitAddStudent(ButtonObj) {
     if (InputAreasComplete) {
         AddStudentToDataBase(ModalBodyCellArray);
         ResetModals();
+    }
+    else {
+        alert(AlertErrorArr);
     }
 }
 

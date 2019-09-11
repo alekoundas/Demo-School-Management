@@ -13,10 +13,10 @@
     //Modal Body Build Here
     var ModalBody = $.parseHTML("<div class='modal-body'></div>");
     var ModalBodyRowGrid = $.parseHTML("<div class='row'></div>");//Add data-trainerid From EditRow()
-    var ModalBodyColGrid = $.parseHTML("<div class='col-3'></div>");
-    var ModalBodyInputFname = $.parseHTML("  <input type='text' name='Fname'   class='form-control'  id='AddModalBodyInputFname'     >");
-    var ModalBodyInputLname = $.parseHTML("  <input type='text' name='Lname'   class='form-control'  id='AddModalBodyInputLname'     >");
-    var ModalBodyInputSubject = $.parseHTML("<input type='text' name='Subject' class='form-control'  id='AddModalBodyInputSubject'   >");
+    var ModalBodyColGrid = $.parseHTML("<div class='col-4'></div>");
+    var ModalBodyInputFname = $.parseHTML("  <label for='AddModalBodyInputFname'>   <b>FirstName </b></label>  <input type='text' name='Fname'   class='form-control'  id='AddModalBodyInputFname'     >");
+    var ModalBodyInputLname = $.parseHTML("  <label for='AddModalBodyInputLname'>   <b>Last Name </b></label>  <input type='text' name='Lname'   class='form-control'  id='AddModalBodyInputLname'     >");
+    var ModalBodyInputSubject = $.parseHTML("<label for='AddModalBodyInputSubject'> <b>Subject   </b></label>  <input type='text' name='Subject' class='form-control'  id='AddModalBodyInputSubject'   >");
 
 
     //Modal Footer Build Here
@@ -74,14 +74,6 @@
 
 
 
-
-
-
-function AddTrainer() {
-    $("#AddTrainerModal").modal("show");//show modal 
-}
-
-
 function SubmitAddTrainer(ButtonObj) {
 
     //Get Values From Inputs
@@ -107,27 +99,37 @@ function SubmitAddTrainer(ButtonObj) {
 
 
     //Get An Array Of Every <input> In That Modal
-    var ModalBodyCellArray = $(ButtonObj).parent().parent().children(".modal-body").children(".row").children(".col-3").children("input");
+    var ModalBodyCellArray = $(ButtonObj).parent().parent().children(".modal-body").children(".row").children(".col-4").children("input");
 
 
     //Check Every <input> If It Has Incorrect Input
-
+    var AlertErrorArr = [];
+    var EditedInputsOnly = [];
     var InputAreasComplete = true;
     for (var i = 0; i < ModalBodyCellArray.length; i++) {
         //Compare The input By name 
         switch ($(ModalBodyCellArray[i]).attr('name')) {
             case 'Fname':
-                if (!ResultFname)
-                    InputAreasComplete = false;
-                break;
+                if (ResultFname) {
+                    EditedInputsOnly.push(ModalBodyCellArray[i]);
+                    break;
+                }
+                AlertErrorArr.push("First Name Must Have A-Za-z As Input and Length 3-15");
+                InputAreasComplete = false;
             case 'Lname':
-                if (!ResultLname)
-                    InputAreasComplete = false;
-                break;
+                if (ResultLname) {
+                    EditedInputsOnly.push(ModalBodyCellArray[i]);
+                    break;
+                }
+                AlertErrorArr.push("Last Name Must Have A-Za-z As Input and Length 3-15");
+                InputAreasComplete = false;
             case 'Subject':
-                if (!ResultSubject)
-                    InputAreasComplete = false;
-                break;
+                if (ResultSubject) {
+                    EditedInputsOnly.push(ModalBodyCellArray[i]);
+                    break;
+                }
+                AlertErrorArr.push("Subject Must Have A-Za-z As Input and Length 3-15");
+                InputAreasComplete = false;
             default:
                 { }
         }
@@ -137,6 +139,9 @@ function SubmitAddTrainer(ButtonObj) {
         AddTrainerToDataBase(ModalBodyCellArray);//Edit Trainer Attributes       
         RefreshTrainerHtml();//Refresh Trainer Table With The New Data
         ResetModals();
+    }
+    else {
+        alert(AlertErrorArr);
     }
 }
 

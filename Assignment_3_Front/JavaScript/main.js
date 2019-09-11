@@ -1,4 +1,5 @@
-﻿//Database  ¯\_(ツ)_/¯
+﻿
+//Database  ¯\_(ツ)_/¯
 var StudentsArray = [];
 var TrainersArray = [];
 var AssignmentsArray = [];
@@ -216,5 +217,5 @@ function ResetModals() {
 }
 
 function DateBuilder(Date) {
-    return [Date.getDate(), Date.getMonth(), Date.getFullYear()].join("/");
+    return [Date.getDate(), Date.getMonth()+1, Date.getFullYear()].join("/");
 }

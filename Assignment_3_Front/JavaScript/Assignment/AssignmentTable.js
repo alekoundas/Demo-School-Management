@@ -7,7 +7,9 @@
     $(trow).append($.parseHTML("<th> Title </th>"));
     $(trow).append($.parseHTML("<th> Description </th>"));
     $(trow).append($.parseHTML("<th> Submit Due </th>"));
-    $(trow).append($.parseHTML("<th> Action <button onclick='AddAssignment();' data-toggle='modal' data-target='#addElementModal' class=' btn btn-sm btn-success'>+</button> <button onclick='RefreshAssignmentHtml();' class=' btn btn-sm btn-success'>0</button> </th>"));
+    $(trow).append($.parseHTML("<th> Action" +
+        " <button data-toggle='modal' data-target='#addElementModal' class=' btn btn-sm btn-success'><i class='fa fa-plus-circle'></i></button>" +
+        "<button onclick='RefreshAssignmentHtml();' class=' btn btn-sm btn-success'><i class=' fa fa-undo'></i></button> </th > "));
 
 
 
@@ -22,10 +24,10 @@
         $(trow).append($.parseHTML("<td>" + AssignmentsArray[i].Description + "</td>"));
         $(trow).append($.parseHTML("<td>" + DateBuilder(AssignmentsArray[i].SubDateTime) + "</td>"));
         //Buttons
-        $(trow).append($.parseHTML("<td>"
-            + "<button onclick = 'EditRowAssignment(this," + AssignmentArray[i].id + ");' data-toggle='modal' data-target='#editElementModal'     class = 'btn btn-primary'> Edit   </button >"
-            + "<button onclick = 'DeleteRowAssignment(   " + AssignmentArray[i].id + ");' data-toggle='modal' data-target='#deleteElementModal'   class = 'btn btn-danger '> Delete </button > "
-            + "<button onclick = 'IncludeRowAssignment(  " + AssignmentArray[i].id + ");' data-toggle='modal' data-target ='#includeElementModal' class = 'btn btn-success'>   Add  </button > " 
+        $(trow).append($.parseHTML("<td >"
+            + "<button onclick = 'EditRowAssignment(this," + AssignmentArray[i].id + ");' data-toggle='modal' data-target='#editElementModal'     class = 'btn btn-Dark'>  <i class='fa fa-edit '       ></i> </button >"
+            + "<button onclick = 'DeleteRowAssignment(   " + AssignmentArray[i].id + ");' data-toggle='modal' data-target='#deleteElementModal'   class = 'btn btn-Dark '>  <i class='fa fa-trash'       ></i> </button > "
+            + "<button onclick = 'IncludeRowAssignment(  " + AssignmentArray[i].id + ");' data-toggle='modal' data-target ='#includeElementModal' class = 'btn btn-Dark'>  <i class='fas fa-cog fa-spin'></i> </button > " 
             + "</td > "
         ));
 

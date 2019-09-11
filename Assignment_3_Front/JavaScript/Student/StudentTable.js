@@ -8,9 +8,10 @@
     $(trow).append($.parseHTML("<th> Last Name </th>"));
     $(trow).append($.parseHTML("<th> Tuition </th>"));
     $(trow).append($.parseHTML("<th> Date Of Birth </th>"));
-    $(trow).append($.parseHTML("<th> Action <button onclick='AddStudent();' data-toggle='modal' data-target='#addElementModal' class=' btn btn-sm btn-success'>+</button> <button onclick='RefreshStudentHtml();' class=' btn btn-sm btn-success'>0</button> </th>"));
-    //$(trow).append($.parseHTML("<th> </td>"));
-    //$(trow).append($.parseHTML("<th></td>"));
+    $(trow).append($.parseHTML("<th> Action " +
+        "<button data-toggle='modal' data-target='#addElementModal' class=' btn btn-sm btn-success'><i class='fa fa-plus-circle'></i></button>" +
+        "<button onclick='RefreshStudentHtml();' class=' btn btn-sm btn-success'><i class=' fa fa-undo'></i></button> </th > "));
+
 
 
     //Table Body Students
@@ -26,9 +27,9 @@
         $(trow).append($.parseHTML("<td>" + DateBuilder(StudentArray[i].Birth) + "</td>"));
 
         $(trow).append($.parseHTML("<td>"
-            + "<button onclick = 'EditRowStudent(this," + StudentArray[i].id + ");' data-toggle = 'modal' data-target='#editElementModal'   class = 'btn btn-primary' > Edit</button >"
-            + "<button onclick = 'DeleteRowStudent(" + StudentArray[i].id + ");'    data-toggle = 'modal' data-target='#deleteElementModal' class = 'btn btn-danger'  > Delete</button > "
-            + "</td > "
+            + "<button onclick = 'EditRowStudent(this," + StudentArray[i].id + ");' data-toggle = 'modal' data-target='#editElementModal'   class = 'btn btn-Dark' > <i class='fa fa-edit '       ></i></button >"
+            + "<button onclick = 'DeleteRowStudent(" + StudentArray[i].id + ");'    data-toggle = 'modal' data-target='#deleteElementModal' class = 'btn btn-Dark'  > <i class='fa fa-trash'       ></i></button > "
+            + "</td > "                                                                                                                                                
         ));
 
     }

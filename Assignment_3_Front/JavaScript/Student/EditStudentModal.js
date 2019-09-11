@@ -15,11 +15,16 @@
     var ModalBody = $.parseHTML("<div class='modal-body'></div>");
     var ModalBodyRowGrid = $.parseHTML("<div class='row'></div>");//Add data-studentid From EditRow()
     var ModalBodyColGrid = $.parseHTML("<div class='col-3'></div>");
+    var ModalBodyColGrid2 = $.parseHTML("<div class='col-3'></div>");
+    var ModalBodyFnameHead = $.parseHTML("  <p><b> FirstName </b></p>");
+    var ModalBodyLnameHead = $.parseHTML("  <p><b> Last Name </b></p>");
+    var ModalBodyTuitionHead = $.parseHTML("<p><b> Tuition   </b></p>");
+    var ModalBodyBirthHead = $.parseHTML("  <p><b>  Birth    </b></p>");
     var ModalBodyFname = $.parseHTML("  <p onclick='ToggleModalBodyCellStudent(this);' id='ModalBodyFname'>  </p>");
     var ModalBodyLname = $.parseHTML("  <p onclick='ToggleModalBodyCellStudent(this);' id='ModalBodyLname'>  </p>");
     var ModalBodyTuition = $.parseHTML("<p onclick='ToggleModalBodyCellStudent(this);' id='ModalBodyTuition'></p>");
     var ModalBodyBirth = $.parseHTML("  <p onclick='ToggleModalBodyCellStudent(this);' id='ModalBodyBirth'>  </p>");
-    var ModalBodyInputFname = $.parseHTML("  <input type='text' name='Fname'    id='EditModalBodyInputFname'  style = 'display:none;' class='form-control'  >");
+    var ModalBodyInputFname = $.parseHTML("  <input type='text' name='Fname'  oninvalid='this.setCustomValidity('Enter User Name Here')'  id='EditModalBodyInputFname'  style = 'display:none;' class='form-control'  >");
     var ModalBodyInputLname = $.parseHTML("  <input type='text' name='Lname'    id='EditModalBodyInputLname'  style = 'display:none;' class='form-control'  >");
     var ModalBodyInputTuition = $.parseHTML("<input type='text' name='Tuition'  id='EditModalBodyInputTuition'style = 'display:none;' class='form-control'  >");
     var ModalBodyInputBirth = $.parseHTML("  <input type='date' name='Birth'    id='EditModalBodyInputBirth'  style = 'display:none;' class='form-control'  >");
@@ -29,7 +34,6 @@
     var ModalFooter = $.parseHTML("<div class='modal-footer'></div>");
     var ModalFooterCancelbt = $.parseHTML("<button type='button' class='btn btn-danger  mr-auto' data-dismiss='modal'>Cancel</button>");
     var ModalFooterUpdatebt = $.parseHTML("<button type='button' class='btn btn-success' onclick='SubmitEditButtonStudent(this);RefreshStudentHtml();'>Update</button>");
-
 
 
     //Append Everything Together
@@ -45,7 +49,33 @@
 
     //Body
     $(ModalCotent).append(ModalBody);
-    //Bootstrap Row
+
+
+    //Bootstrap Row 1
+    $(ModalBody).append(ModalBodyRowGrid);
+
+    //Bootstrap Col
+    $(ModalBodyColGrid).append(ModalBodyFnameHead);
+    $(ModalBodyColGrid).clone().appendTo(ModalBodyRowGrid).append(ModalBodyFname);
+    $(ModalBodyFnameHead).remove();//Remove the input because clone() will cary any next inputs with it
+
+    //Bootstrap Col
+    $(ModalBodyColGrid).append(ModalBodyLnameHead);
+    $(ModalBodyColGrid).clone().appendTo(ModalBodyRowGrid).append(ModalBodyLname);
+    $(ModalBodyLnameHead).remove();
+
+    //Bootstrap Col
+    $(ModalBodyColGrid).append(ModalBodyTuitionHead);
+    $(ModalBodyColGrid).clone().appendTo(ModalBodyRowGrid).append(ModalBodyTuition);
+    $(ModalBodyTuitionHead).remove();
+
+    //Bootstrap Col
+    $(ModalBodyColGrid).append(ModalBodyBirthHead);
+    $(ModalBodyColGrid).clone().appendTo(ModalBodyRowGrid).append(ModalBodyBirth);
+    $(ModalBodyBirthHead).remove();
+
+
+    //Bootstrap Row2
     $(ModalBody).append(ModalBodyRowGrid);
 
     //Bootstrap Col
@@ -137,6 +167,7 @@ function SubmitEditButtonStudent(ButtonObj) {
 
     //Check Every <input> If Its Empty Or Has Incorrect Input
     var EditedInputsOnly = [];
+    var AlertErrorArr = [];
     var InputAreasComplete = true;
     for (var i = 0; i < ModalBodyCellArray.length; i++)
     {
@@ -149,6 +180,7 @@ function SubmitEditButtonStudent(ButtonObj) {
                         EditedInputsOnly.push(ModalBodyCellArray[i]);
                         break;
                     }
+                    AlertErrorArr.push("First Name Must Have A-Za-z As Input and Length 3-15");
                     InputAreasComplete = false;
                     break;
                 case 'Lname':
@@ -156,6 +188,7 @@ function SubmitEditButtonStudent(ButtonObj) {
                         EditedInputsOnly.push(ModalBodyCellArray[i]);
                         break;
                     }
+                    AlertErrorArr.push("Last Name Must Have A-Za-z As Input and Length 3-15");
                     InputAreasComplete = false;
                     break;
                 case 'Tuition':
@@ -163,6 +196,7 @@ function SubmitEditButtonStudent(ButtonObj) {
                         EditedInputsOnly.push(ModalBodyCellArray[i]);
                         break;
                     }
+                    AlertErrorArr.push("Tuition Must Have 0-9  As Input and Length 1-6");
                     InputAreasComplete = false;
                     break;
                 case 'Birth':
@@ -170,6 +204,7 @@ function SubmitEditButtonStudent(ButtonObj) {
                         EditedInputsOnly.push(ModalBodyCellArray[i]);
                         break;
                     }
+                    AlertErrorArr.push("Birth Day Must Be Greater Than 19YY/MM/DD ");
                     InputAreasComplete = false;
                     break;
                 default:
@@ -185,6 +220,9 @@ function SubmitEditButtonStudent(ButtonObj) {
       
         EditStudent(EditedInputsOnly); //Edit Student Attributes       
         ResetModals();
+    }
+    else {
+        alert(AlertErrorArr);
     }
 }
 

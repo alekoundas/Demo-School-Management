@@ -7,7 +7,9 @@
     $(trow).append($.parseHTML("<th> First Name </th>"));
     $(trow).append($.parseHTML("<th> Last Name </th>"));
     $(trow).append($.parseHTML("<th> Subject </th>"));
-    $(trow).append($.parseHTML("<th> Action <button onclick='AddTrainer();' data-toggle='modal' data-target='#addElementModal' class=' btn btn-sm btn-success'>+</button><button onclick='RefreshTrainerHtml();' class=' btn btn-sm btn-success'>0</button> </th>"));
+    $(trow).append($.parseHTML("<th> Action" +
+        "<button  data-toggle='modal' data-target='#addElementModal' class=' btn btn-sm btn-success'><i class='fa fa-plus-circle'></i></button>" +
+        "<button onclick='RefreshTrainerHtml();' class=' btn btn-sm btn-success'><i class=' fa fa-undo'></i></button> </th > "));
 
 
     //Table Body Trainers
@@ -21,9 +23,9 @@
         $(trow).append($.parseHTML("<td>" + TrainerArray[i].Lname + "</td>"));
         $(trow).append($.parseHTML("<td>" + TrainerArray[i].Subject + "</td>"));
         $(trow).append($.parseHTML("<td>"
-            + "<button onclick = 'EditRowTrainer(this," + TrainerArray[i].id + ");' data-toggle = 'modal' data-target = '#editElementModal'   class = 'btn btn-primary'> Edit   </button >"
-            + "<button onclick = 'DeleteRowTrainer(" + TrainerArray[i].id + ");'    data-toggle = 'modal' data-target = '#deleteElementModal' class = 'btn btn-danger' > Delete </button > "
-            + "</td > "
+            + "<button onclick = 'EditRowTrainer(this," + TrainerArray[i].id + ");' data-toggle = 'modal' data-target = '#editElementModal'   class = 'btn btn-Dark'> <i class='fa fa-edit '       ></i></button >"
+            + "<button onclick = 'DeleteRowTrainer(" + TrainerArray[i].id + ");'    data-toggle = 'modal' data-target = '#deleteElementModal' class = 'btn btn-Dark' > <i class='fa fa-trash'       ></i></button > "
+            + "</td > "                                                                                                                                                 
         ));
     }
 }

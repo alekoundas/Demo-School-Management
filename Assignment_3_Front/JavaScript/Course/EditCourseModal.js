@@ -13,8 +13,14 @@
 
     //Modal Body Build Here
     var ModalBody = $.parseHTML("<div class='modal-body'></div>");
-    var ModalBodyRowGrid = $.parseHTML("<div class='row'></div>");//Add data-Courseid From EditRow()
-    var ModalBodyColGrid = $.parseHTML("<div class='col-3'></div>");
+    var ModalBodyRowGrid = $.parseHTML("<div class='row'></div>");
+    var ModalBodyRowGrid2 = $.parseHTML("<div class='row'></div>");
+    var ModalBodyColGrid = $.parseHTML("<div class='col-2'></div>");
+    var ModalBodyTitleHead = $.parseHTML(" <p><b> Title </b></p>");
+    var ModalBodyStreamHead = $.parseHTML("<p><b> Stream </b></p>");
+    var ModalBodyTypeHead = $.parseHTML("  <p><b> Type </b></p>");
+    var ModalBodyStartDHead = $.parseHTML("<p><b> Start Day </b></p>");
+    var ModalBodyEndDHead = $.parseHTML("  <p><b> End Day </b></p>");
     var ModalBodyTitle = $.parseHTML(" <p onclick='ToggleModalBodyCellCourse(this);' id='ModalBodyTitle'>  </p>");
     var ModalBodyStream = $.parseHTML("<p onclick='ToggleModalBodyCellCourse(this);' id='ModalBodyStream'> </p>");
     var ModalBodyType = $.parseHTML("  <p onclick='ToggleModalBodyCellCourse(this);' id='ModalBodyType'>   </p>");
@@ -30,7 +36,7 @@
     //Modal Footer Build Here
     var ModalFooter = $.parseHTML("<div class='modal-footer'></div>");
     var ModalFooterCancelbt = $.parseHTML("<button type='button' class='btn btn-danger  mr-auto' data-dismiss='modal'>Cancel</button>");
-    var ModalFooterUpdatebt = $.parseHTML("<button type='button' class='btn btn-success' onclick='SubmitEditButtonCourse(this);RefreshCourseHtml();'>Update</button>");
+    var ModalFooterUpdatebt = $.parseHTML("<button type='button' class='btn btn-success' onclick='SubmitEditButtonCourse(this);'>Update</button>");
 
 
 
@@ -47,32 +53,64 @@
 
     //Body
     $(ModalCotent).append(ModalBody);
-    //Bootstrap Row
+
+
+    //Bootstrap Row 1
     $(ModalBody).append(ModalBodyRowGrid);
 
     //Bootstrap Col
-    $(ModalBodyColGrid).append(ModalBodyInputTitle);
+    $(ModalBodyColGrid).append(ModalBodyTitleHead);
     $(ModalBodyColGrid).clone().appendTo(ModalBodyRowGrid).append(ModalBodyTitle);
+    $(ModalBodyTitleHead).remove();//Remove the input because clone() will cary any next inputs with it
+
+    //Bootstrap Col
+    $(ModalBodyColGrid).append(ModalBodyStreamHead);
+    $(ModalBodyColGrid).clone().appendTo(ModalBodyRowGrid).append(ModalBodyStream);
+    $(ModalBodyStreamHead).remove();
+
+    //Bootstrap Col
+    $(ModalBodyColGrid).append(ModalBodyTypeHead);
+    $(ModalBodyColGrid).clone().appendTo(ModalBodyRowGrid).append(ModalBodyType);
+    $(ModalBodyTypeHead).remove();
+
+    //Bootstrap Col
+    $(ModalBodyColGrid).append(ModalBodyStartDHead);
+    $(ModalBodyColGrid).clone().appendTo(ModalBodyRowGrid).append(ModalBodyStartD);
+    $(ModalBodyStartDHead).remove();
+
+    //Bootstrap Col
+    $(ModalBodyColGrid).append(ModalBodyEndDHead);
+    $(ModalBodyColGrid).clone().appendTo(ModalBodyRowGrid).append(ModalBodyEndD);
+    $(ModalBodyEndDHead).remove();
+
+
+
+    //Bootstrap Row2
+    $(ModalBody).append(ModalBodyRowGrid2);
+
+    //Bootstrap Col
+    $(ModalBodyColGrid).append(ModalBodyInputTitle);
+    $(ModalBodyColGrid).clone().appendTo(ModalBodyRowGrid2).append(ModalBodyTitle);
     $(ModalBodyInputTitle).remove();//Remove the input because clone() will cary any next inputs with it
 
     //Bootstrap Col
     $(ModalBodyColGrid).append(ModalBodyInputStream);
-    $(ModalBodyColGrid).clone().appendTo(ModalBodyRowGrid).append(ModalBodyStream);
+    $(ModalBodyColGrid).clone().appendTo(ModalBodyRowGrid2).append(ModalBodyStream);
     $(ModalBodyInputStream).remove();
 
     //Bootstrap Col
     $(ModalBodyColGrid).append(ModalBodyInputType);
-    $(ModalBodyColGrid).clone().appendTo(ModalBodyRowGrid).append(ModalBodyType);
+    $(ModalBodyColGrid).clone().appendTo(ModalBodyRowGrid2).append(ModalBodyType);
     $(ModalBodyInputType).remove();
 
     //Bootstrap Col
     $(ModalBodyColGrid).append(ModalBodyInputStartD);
-    $(ModalBodyColGrid).clone().appendTo(ModalBodyRowGrid).append(ModalBodyStartD);
+    $(ModalBodyColGrid).clone().appendTo(ModalBodyRowGrid2).append(ModalBodyStartD);
     $(ModalBodyInputStartD).remove();
 
     //Bootstrap Col
     $(ModalBodyColGrid).append(ModalBodyInputEndD);
-    $(ModalBodyColGrid).clone().appendTo(ModalBodyRowGrid).append(ModalBodyEndD);
+    $(ModalBodyColGrid).clone().appendTo(ModalBodyRowGrid2).append(ModalBodyEndD);
     $(ModalBodyInputEndD).remove();
 
     //Footer
@@ -84,14 +122,12 @@
 }
 
 
-
+var CourseID;
 
 function EditRowCourse(row, CourseId) {
     $("#EditCourseModal").modal("show");//show modal 
-
-    //Add data- To The row Of The Modal Body With The Course Id
-    //So I Can Retrieve It Later
-    $(".modal-body .row").attr("data-courseid", CourseId);
+   
+    CourseID = CourseId;
 
     //Retrieve Data From table
     var Title = $(row).parent().siblings("td:eq( 1 )").text();
@@ -143,10 +179,11 @@ function SubmitEditButtonCourse(ButtonObj) {
 
 
     //Get An Array Of Every <input> In That Modal
-    var ModalBodyCellArray = $(ButtonObj).parent().parent().children(".modal-body").children(".row").children(".col-3").children("input");
+    var ModalBodyCellArray = $(ButtonObj).parent().parent().children(".modal-body").children(".row").children(".col-2").children("input");
 
     //Check Every <input> If Its Empty Or Has Incorrect Input
     var EditedInputsOnly = [];
+    var AlertErrorArr = [];
     var InputAreasComplete = true;
     for (var i = 0; i < ModalBodyCellArray.length; i++) {
         //Compare The input By name 
@@ -158,6 +195,7 @@ function SubmitEditButtonCourse(ButtonObj) {
                         break;
                     }
                     InputAreasComplete = false;
+                    AlertErrorArr.push("Title Must Have A-Za-z As Input and Length 3-15");
                     break;
                 case 'Stream':
                     if (ResultStream) {
@@ -165,6 +203,7 @@ function SubmitEditButtonCourse(ButtonObj) {
                         break;
                     }
                     InputAreasComplete = false;
+                    AlertErrorArr.push("Stream Must Have A-Za-z As Input and Length 3-15");
                     break;
                 case 'Type':
                     if (ResultType) {
@@ -172,6 +211,7 @@ function SubmitEditButtonCourse(ButtonObj) {
                         break;
                     }
                     InputAreasComplete = false;
+                    AlertErrorArr.push("Type Must Have A-Za-z As Input and Length 3-15");
                     break;
                 case 'StartD':
                     if (ResultStartD) {
@@ -179,6 +219,7 @@ function SubmitEditButtonCourse(ButtonObj) {
                         break;
                     }
                     InputAreasComplete = false;
+                    AlertErrorArr.push("Start Day Must Be Greater Than 19YY/MM/DD ");
                     break;
                 case 'EndD':
                     if (ResultEndD) {
@@ -186,6 +227,7 @@ function SubmitEditButtonCourse(ButtonObj) {
                         break;
                     }
                     InputAreasComplete = false;
+                    AlertErrorArr.push("End Day Must Be Greater Than 19YY/MM/DD ");
                     break;
                 default:
                     { }
@@ -199,18 +241,19 @@ function SubmitEditButtonCourse(ButtonObj) {
 
         EditCourse(EditedInputsOnly); //Edit Course Attributes       
         ResetModals();
+        RefreshCourseHtml();
+    } else {
+        alert(AlertErrorArr);
+
     }
 }
 
 
 
 function EditCourse(CourseEdited) {
-    //Get The Id Of The Course To Be Edited
-    var CourseId = $(CourseEdited[0]).parents('div.row').attr("data-Courseid");
-
     //From All Courses Find The One With Matching Id
     for (var i = 0; i < CoursesArray.length; i++) {
-        if (CoursesArray[i].id == CourseId) {
+        if (CoursesArray[i].id == CourseID) {
             //For Every Cell That Needs Edit Make The Changes Permanent To The CourseArray
             for (var j = 0; j < CourseEdited.length; j++) {
                 switch ($(CourseEdited[j]).attr('name')) {
